@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
       msg.textContent = error.message;
       return;
     }
+    console.log('Sessão:', data.session);
 
+    window.location.href = '/dashboard.html';
   });
 });

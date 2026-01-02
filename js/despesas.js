@@ -139,15 +139,11 @@ async function carregar_fixo() {
 
     const {data, error} =await supabase
         .from('despesas_fixas')
-        .select('*')
-
-    console.log('carregar_fixo rodou');
-    console.log('resposta do banco',data);
-    console.log ('erro', error);
+        .select('identificacao, dia_vencimento, valor')
 
 
         const tabela = document.getElementById("dadosBanco");
-        tabela.innerHTML = '';
+       
 
         data.forEach(item => {
             const tr = document.createElement('tr');

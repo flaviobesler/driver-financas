@@ -1,7 +1,4 @@
 import { supabase } from "./supabaseClients.js";
-console.log('dashboard.js carregou')
-
-
 
 
 document.getElementById('btn_ganho').addEventListener('click',add_ganho);
@@ -75,8 +72,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
     .from('ganhos_do_dia')
     .select('valor, criado_em');
 
-    console.log('metaData raw:', metaData);
-    console.log('ganhoData raw:', ganhoData);
+    
     
   if (metaError || ganhoError){
     console.error(metaError || ganhoError);
@@ -85,11 +81,9 @@ document.addEventListener('DOMContentLoaded', async () =>{
   
   //reutilização da query 'meta_semanal'
 
-
-  
   const metaId = metaData.id;
   const meta = Number(metaData[0].valor);//usar [0] só com rls de desenvolvimento 'with - true' no supabase
-  
+
   const metaSpan = document.getElementById('metaValor');
   const metaInput = document.getElementById('valor_meta');
   const btnRegistrar = document.getElementById('btn_registrar');
@@ -146,7 +140,7 @@ async function Editarmeta() {
   
 
 }
-//meta diaria
+//meta diaria 
 const metadiaria = document.getElementById('metadiaria');
 const diaria = meta /7;
 metadiaria.textContent = formatarReal(diaria)
@@ -155,7 +149,7 @@ metadiaria.textContent = formatarReal(diaria)
 //final da reutilização da query
 
   const ganhos = ganhoData; //arrays das colunas valor e criado_em
-  console.log(ganhos)
+
   
   
 
@@ -172,13 +166,13 @@ metadiaria.textContent = formatarReal(diaria)
     const segunda = new Date(hoje);
     segunda.setDate(hoje.getDate()+diffSegunda);
     segunda.setHours(0,0,0,0);
-    console.log('segunda:', segunda);
+
 
 
     const domingo = new Date(segunda);
     domingo.setDate(segunda.getDate()+6);
     domingo.setHours(23,59,59,);
-    console.log('domingo:', domingo);
+
 
     return {segunda, domingo}; //ordem correta: inicio(segunda) e domingo(fim)
   }
@@ -244,9 +238,7 @@ metadiaria.textContent = formatarReal(diaria)
 const faltante = document.getElementById('faltante');
 faltante.textContent = (progresso.restante).toFixed(2);
 
-console.log('atingido:', progresso.atingido);
-console.log('restante:', progresso.restante);
-console.log(meta)
+
 });
 
 

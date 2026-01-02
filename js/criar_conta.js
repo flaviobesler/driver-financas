@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClients.js";
-console.log('criar_conta.js carregado');
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    console.log(email, password);
+    
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (error) {
-      console.error(error);
+      
       msg.textContent = error.message;
       return;
     }
@@ -31,7 +31,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
 });
-document.getElementById('submit').addEventListener('click', () => {
-  alert('CLIQUOU');
-});
+
 
