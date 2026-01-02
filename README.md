@@ -30,10 +30,11 @@ O objetivo do projeto é consolidar conceitos de frontend, autenticação, banco
 - atualmente:
 -  a autenticação é feita pelo supabase Auth
 -  Algumas validações de lógica ainda estão concentradas no frontend (JavaScript)
-- O uso de Row Level Security (RLS) está presente, porém com regras simplificadas para fins de desenvolvimento
+- O uso de Row Level Security (RLS) está presente, porém com regras simplificadas para fins de desenvolvimento.
+---
  **Observação importante:**  
 Em um ambiente de produção real, parte dessas validações deveria ser movida para o backend (edge functions ou API intermediária), com regras de RLS mais restritivas e separação clara entre permissões de leitura e escrita.
-
+---
 Este repositório prioriza clareza, aprendizado e funcionamento do produto, deixando explícitos os pontos de evolução planejados em segurança.
 ---
 ## Autor
