@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>acessar</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* --- FORMULÁRIO ---- */
+        .login {
+            max-width: 350px;
+        }
+
+        .login img {
+            width: 280px;
+            margin-bottom: 50px;
+        }
+
+        .login input {
+            
+            min-height: 35px;
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+    
+
+        .botoes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .botoes button {
+    
+            min-height: 35px;
+            font-size: 15px;
+            border: none;
+            margin-top: 10px;
+            background-color: #6191c5;
+            border-radius: 5px;
+        }
+
+        .botoes a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* --- IMAGEM LADO DIREITO (PC) --- */
+        
+
+        .side img {
+            border-radius: 20px;
+        }
+
+        .links a {
+            margin: 20px;
+            text-decoration: none;
+            font-size: 20px;
+           
+        }
+
+        /* Remover a lista */
+        .links {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .side img {
+                display: none;
+            }
+
+            .links a {
+                color: black;
+                background: none;
+                margin: 10px;
+            }
+            .imagem1{display: none;}
+            .login input {
+                width: 93%;}
+            
+        }
+        @media (min-width:900px) {
+                .side{
+                 display: flex;
+                justify-content: flex-end; /* joga tudo para a direita */
+                align-items: center;       /* centraliza verticalmente (opcional) */
+                width: 100%;
+                }
+                .login{
+                margin-left: 120px;
+                }
+                .links{
+                position: absolute;
+                right: 270px;
+                top:150px}
+                .links a{
+                color: white;
+                font-size: 20px;
+                }
+                .imagem2{
+                display: none;}
+                .login input {
+                width: 100%;}
+                .botoes button {
+                width: 109%;}
+        }
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- FORMULÁRIO -->
+        <div class="login">
+            <img class="imagem1" src="logo/driver_finanças.png">
+            <img class="imagem2" src="logo/logo4.png" alt="">
+
+            <div>
+                cadastro de senha<br>
+                <input type="text" placeholder="codigo do email"><br>
+                <input type="password" placeholder="senha">
+                <input type="password" placeholder="repita sua senha">
+            </div>
+
+            <div class="botoes">
+                <button><a href="">trocar senha</a></button>
+                
+            </div>
+            
+        </div>
+
+        <!-- IMAGEM DO LADO DIREITO -->
+        <div class="side">
+            <img src="logo/logo3.png">
+        </div>
+    <div class="links">
+        <a href="">Home</a>
+        <a href="mailto:driverfinancas@gmail.com?subject=Suporte%20Driver%20Finanças">Contato</a>
+    </div>
+        
+</body>
+</html>

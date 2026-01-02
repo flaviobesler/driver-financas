@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="/js/navbar.js" defer></script>
+
+    <style>
+        .geral{
+            font-family: 'Roboto', sans-serif;
+            font-size: 20px;
+        }
+        .nome{
+            list-style: none;
+            
+        }
+        .nome button{
+            border: none;
+            border-radius: 5px;
+            width: 100px;
+            min-height: 30px;
+            color: white;
+            background-color: #6191c5;;
+            }
+        .nome li{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        }
+        .botao{
+            display: flex;
+            border: none;
+            list-style: none;
+            margin-top: 100px;
+            gap: 20px;
+        }
+        .botao button{  
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+            
+            min-height: 30px;
+            color: white;
+            background-color: #6191c5;}
+
+        .geral h1{
+        margin-left: 35px;
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <button class="menu-toggle" aria-label="Abrir menu"> ☰</button>
+        <ul class="menu">
+            <li><a href="dashboard.html">dashboard</a></li>
+            <li><a href="despesas.html">Despesas</a></li>
+            <li><a href="relatorios.html">relatorios</a></li>
+            <li class="Account"><a href="conta.html">conta</a></li>
+        </ul>
+    </nav>
+    <div class="geral">
+        <h1>Sua conta</h1>
+        <ul class="nome">
+            <li>nome</li>
+            <li><button type="button">editar</button></li>
+            <li>email</li>
+            <li>status da assinatura</li>
+            <li>vencimento</li>
+        </ul>
+        <ul class="botao">
+            <li><button>alterar senha</button></li>
+            <li><button>cancelar assinatura</button></li>
+        </ul>
+
+    </div>
+    
+</body>
+</html>

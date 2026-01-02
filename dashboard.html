@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="/js/navbar.js" defer></script>
+    
+
+<style>
+
+    .conteiner{
+        font-family: 'Roboto', sans-serif;}
+    .lucro ul,
+    .meta ul{
+    list-style: none;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 300px;
+}
+    
+    .lucro input,
+    .meta input{
+    margin-right: 20px;
+    width: 250px;
+    min-height: 30px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    
+    }
+
+    .lucro button,
+    .meta button{
+    width: 100px;
+    min-height: 30px;
+    font-size: 15px;
+    color: white;
+    border: none;
+    background-color: #6191c5;
+    border-radius: 5px;
+    }
+    .first{
+    margin-top: 20px;}
+    .lucro li,
+    .meta li{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;}
+    
+    .semana ul,
+    .mensal ul{
+        list-style: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+
+    }
+
+    .fonte{font-size: 15px;
+    
+    }
+
+    
+   @media (min-width:900px) {
+    .conteiner{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 80px;
+    }
+    
+   .imagem{
+    display: block;
+    justify-content: center;
+    margin-top: 10px;
+}
+   .conteiner2{
+    
+    margin-top: 20px;
+    }
+    
+    .mensal{
+    margin-left: 500px;}
+    
+    }
+
+
+    @media (max-width:900px) {
+        .conteiner{
+            padding-top: 40px;}
+        .imagem{display: none;}
+        .fonte{margin-left: 10px;}
+        .lucro, .meta{
+            box-sizing: border-box;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        
+    }
+</style>
+
+
+
+
+
+
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <button class="menu-toggle" aria-label="Abrir menu"> ☰</button>
+        <ul class="menu">
+            <li><a href="dashboard.html">dashboard</a></li>
+            <li><a href="despesas.html">Despesas</a></li>
+            <li><a href="relatorios.html">relatorios</a></li>
+            <li class="Account"><a href="conta.html">conta</a></li>
+        </ul>
+    </nav>
+
+
+    <div class="conteiner">
+        <div class="lucro">
+            <h1>Ganho do dia</h1>
+            <ul>
+                </li>
+                <li>identificação (opicional) <br>
+                    <input  id="identificacao_ganho"
+                            type="text" 
+                            placeholder="transporte, freelancer, salario">
+                </li>
+                <li>
+                    valor <br>
+                    <input  id="valor_ganho"
+                            type="number" 
+                            placeholder="R$0,00">
+                </li>
+                <li>
+                    <button id="btn_ganho"
+                            type="button"> registrar</button>
+                </li>
+        
+            </ul>
+            <p class="fonte">Sua meta semanal equivale a uma média <br>diária de R$ <span id="metadiaria"></span>. Use como referência.</p>
+        </div>
+        <div class="imagem">
+            <img src="fotos/faixa.jpg">
+        </div>
+        <div class="meta">
+            <h1>Meta semanal</h1>
+            <ul >
+                <li class="first">
+                    <span id="metaValor" style="font-weight: bold;"></span>
+                    <input  id="valor_meta"
+                            type="number" 
+                            placeholder="R$ 0,00">
+                </li>
+                <li>
+                    <button type="button" id="btn_registrar">registrar</button>
+                    <button type="button" id="btn_editar"    style="display: none;"   >editar</button>
+                    <button type="button" id="btn_editarMeta" style="display: none;">registrar</button>
+                </li>
+                <li class="grafico-pizza">
+                    <canvas id="metaChart" width="100px" height="100px"></canvas>
+                                    
+                </li>
+                <li>
+                    faltam <span id="faltante"></span> para atingir a meta
+                </li>
+        
+                
+            </ul>
+        </div>
+         
+        
+    </div> 
+    </div>
+    
+    <script src="/js/chats.js"></script>   
+    <script type="module" src="/js/dashboard.js" defer></script>
+
+
+</body>
+</html>
