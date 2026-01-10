@@ -150,9 +150,14 @@ async function carregar_fixo() {
         const valores = data.map(item => Number(item.valor));
         const total = valores.reduce((acc, valor) => acc + valor,0);
 
+        const esteMes = String(new Date().getMonth()+1).padStart(2, '0');
+        console.log(esteMes)
+
+
+
+
         const tabela = document.getElementById("dadosBanco");
         data.forEach(item => {
-
         
 
             const tr = document.createElement('tr');
@@ -168,7 +173,8 @@ async function carregar_fixo() {
 
                 const tdDia = document.createElement('td');
                 tdDia.className = 'coluna_nome';
-                tdDia.textContent = item.dia_vencimento;
+                const dia = item.dia_vencimento.slice(8,10);
+                tdDia.textContent = `${dia}/${esteMes}`;
 
                 tr.append(tdNome, tdValor, tdDia);
                 tabela.appendChild(tr);
