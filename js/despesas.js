@@ -133,19 +133,28 @@ function formatarReal(valor){
     currency: 'BRL'
   }).format(valor);
 }
+document.getElementById('esconder_dados').style.display = 'none';
+document.getElementById('tabelabanco').style.display = 'none';
 
 document.getElementById("mostrar_dados").addEventListener('click', carregar_fixo);
 async function carregar_fixo() {
+    const tbody = document.getElementById('dadosBanco');
+    tbody.replaceChildren();
+
 
     const {data, error} =await supabase
         .from('despesas_fixas')
         .select('identificacao, dia_vencimento, valor')
 
+        
+
 
         const tabela = document.getElementById("dadosBanco");
-       
-
         data.forEach(item => {
+
+            const valores = data.map(item => Number(item.valor));
+            const total = valores.reduce((acc, valor) => acc + valor,0);
+
             const tr = document.createElement('tr');
             tr.classList.add("linha_banco")
 
@@ -163,7 +172,32 @@ async function carregar_fixo() {
 
                 tr.append(tdNome, tdValor, tdDia);
                 tabela.appendChild(tr);
+            const trTotal = document.createElement('tr');
+            const tdTotal = document.createElement('td');
+                tdTotal.colSpan = 3;
+                tdTotal.className = 'coluna_nome';
+                tdTotal.textContent = 'total: ' +formatarReal(total)
+
+                trTotal.appendChild(tdTotal)
+                tabela.appendChild(trTotal);
         })
         
-
+    document.getElementById('mostrar_dados').style.display = 'none';
+    document.getElementById('esconder_dados').style.display = 'block';
+    document.getElementById('tabelabanco').style.display = 'block';
 }
+
+
+
+document.getElementById('esconder_dados').addEventListener('click', esconder_dados)
+function esconder_dados(){
+    
+    
+    document.getElementById('tabelabanco').style.display = 'none';
+    document.getElementById('mostrar_dados').style.display = 'block';
+    document.getElementById('esconder_dados').style.display = 'none';
+    const tbody = document.getElementById('dadosBanco');
+    tbody.replaceChildren();
+    
+}
+

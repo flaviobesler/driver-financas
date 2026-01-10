@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Despesas</title>
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
     <script src="/js/navbar.js" defer></script>
 
     <style>
@@ -310,46 +311,36 @@
                 <!--tabela despesas fixas-->
 
                 <div class="identacao">  
-                    <button class="mostrar_dados" id="mostrar_dados">Mostrar despesas fixas</button>
 
-                    <table class="table">
-                            <tr id="linha-info" style="display: none;" class="linha-info">                            
-                                    <td>despesa</td>
-                                    <td>valor</td>
-                                    <td>vencimento</td>
-                                    
+                    <button class="mostrar_dados" id="mostrar_dados">Mostrar despesas fixas</button>
+                    <button class="mostrar_dados" id="esconder_dados">Esconder despesa</button>
+
+                    <table class="table" id="tabelabanco">
+                            <tr class="linha-info">                            
+                                    <td >despesa</td>
+                                    <td >valor</td>
+                                    <td >vencimento</td>            
                             </tr>
-                           
-                        
-                        <tbody id="dadosBanco">
-                            
-                            
-                            
-                        </tbody>
+                            <tbody id="dadosBanco"></tbody>
                     </table>
                 </div>  
                 
             </div>
         </div>
-<script type="module" src="js/despesas.js"></script> 
-<script>
-    document.getElementById('pag_avulso').addEventListener('change', function(){
-        const parcelas = document.getElementById('parcel_avulso');
-        parcelas.style.display = this.value === 'credito'?'block': 'none';
-    })
-     
-    const botao = document.querySelector('#mostrar_dados');
-    const linhaInfo = document.querySelector('#linha-info');
+    <script type="module" src="js/despesas.js" defer></script> 
+    <script>
+        document.getElementById('pag_avulso').addEventListener('change', function(){
+            const parcelas = document.getElementById('parcel_avulso');
+            parcelas.style.display = this.value === 'credito'?'block': 'none';
+        });
+        
+    </script>  
+    <script type="module" src="/js/span.js" defer></script>
 
-    botao.addEventListener('click', () => {
-    linhaInfo.style.display =
-        linhaInfo.style.display === 'none' ? 'table-row' : 'none';
-});
-    
-
-
-</script>  
-
+    <footer class="footer">
+        <p>© <span id="spanAno"></span> - Driver finanças - <span id="spanversão"></span><br>
+         Todos os direitos reservados</p>
+    </footer>
     
 
 </body>
