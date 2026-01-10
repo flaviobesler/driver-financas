@@ -147,13 +147,13 @@ async function carregar_fixo() {
         .select('identificacao, dia_vencimento, valor')
 
         
-
+        const valores = data.map(item => Number(item.valor));
+        const total = valores.reduce((acc, valor) => acc + valor,0);
 
         const tabela = document.getElementById("dadosBanco");
         data.forEach(item => {
 
-            const valores = data.map(item => Number(item.valor));
-            const total = valores.reduce((acc, valor) => acc + valor,0);
+        
 
             const tr = document.createElement('tr');
             tr.classList.add("linha_banco")
@@ -172,15 +172,18 @@ async function carregar_fixo() {
 
                 tr.append(tdNome, tdValor, tdDia);
                 tabela.appendChild(tr);
-            const trTotal = document.createElement('tr');
-            const tdTotal = document.createElement('td');
-                tdTotal.colSpan = 3;
-                tdTotal.className = 'coluna_nome';
-                tdTotal.textContent = 'total: ' +formatarReal(total)
+           
+        });
 
-                trTotal.appendChild(tdTotal)
-                tabela.appendChild(trTotal);
-        })
+        const trTotal = document.createElement('tr');
+        const tdTotal = document.createElement('td');
+        tdTotal.colSpan = 3;
+        tdTotal.className = 'coluna_nome';
+        tdTotal.textContent = 'total: ' +formatarReal(total)
+
+        trTotal.appendChild(tdTotal)
+        tabela.appendChild(trTotal);
+
         
     document.getElementById('mostrar_dados').style.display = 'none';
     document.getElementById('esconder_dados').style.display = 'block';
