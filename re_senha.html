@@ -56,6 +56,7 @@
             margin-top: 10px;
             background-color: #6191c5;
             border-radius: 5px;
+            color: white;
         }
 
         .botoes a {
@@ -148,11 +149,12 @@
 
             <div>
                 esqueceu sua senha? <br>
-                <input type="text" placeholder="seu_email@example.com"><br>
+                <input type="email" id="email" placeholder="seu_email@example.com"><br>
+                <span id="span"></span>
             </div>
 
             <div class="botoes">
-                <button><a href="">enviar codigo</a></button>
+                <button id="recuperar">enviar email</button>
                 <button><a href="login.html">já possuo cadastro</a></button>
             </div>
             
@@ -167,7 +169,7 @@
         <a href="mailto:driverfinancas@gmail.com?subject=Suporte%20Driver%20Finanças">Contato</a>
     </div>
 
-   
-        
+<script type="module" src="/js/re_senha.js"></script>   
+
 </body>
 </html>
