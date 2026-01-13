@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (error) {
       msg.textContent = 'email ou senha incorretos';
+      msg.style.color = 'red';
       return;
     }
     console.log('Sessão:', data.session);
