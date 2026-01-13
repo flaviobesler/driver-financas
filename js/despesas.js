@@ -16,7 +16,7 @@ async function add_avulso() {
         pagament_avulso === 'debito'||
         pagament_avulso === 'dinheiro'||
         pagament_avulso === 'outras'
-    ){parcelament_avulso = 1}
+    ){parcelament_avulso = 0}
 
     if (pagament_avulso === 'credito' && (isNaN(parcelament_avulso) || parcelament_avulso <= 0)){
         alert ('preencha a quantidade de parcelas');

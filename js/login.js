@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (error) {
-      msg.textContent = error.message;
+      msg.textContent = 'email ou senha incorretos';
       return;
     }
     console.log('Sessão:', data.session);

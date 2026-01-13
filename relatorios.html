@@ -1,208 +1,223 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>relatorios</title>
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="footer.css">
-    <script src="/js/navbar.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios</title>
 
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <script src="/js/navbar.js" defer></script>
 
-    <style>
-        tr {
-        page-break-inside: avoid;
-        }
+  <style>
+    tr {
+      page-break-inside: avoid;
+    }
 
-        table {
-        page-break-after: auto;
-        page-break-before: auto;
-}
-        .conteiner{
-            margin-top: 20px;
-            font-family: 'roboto', sans-serif;
-        }
-        
-        .extrato{
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-            
-        }
+    table {
+      page-break-after: auto;
+      page-break-before: auto;
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-        .extrato ul{
-            list-style: none; 
-            margin-right: 20px;
-        }
-        
-        .extrato li{
-            font-size: 25px;
-        }
-        .extrato select{
-        width: 250px;
-        min-height: 30px;
-        border: 1px solid rgba(0,0,0,0.2);
-        border-radius: 5px;    
-        }
-        .extrato button{
-            margin-top: 15px;
-           
-            margin-bottom: 10px;
-            background-color: #6191c5;;
-            width: 121px;
-            min-height: 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 15px;
-            color: white;
-        }
+    .conteiner {
+      margin-top: 20px;
+      font-family: 'Roboto', sans-serif;
+    }
 
-        .titulo-interno{
-        margin-right: 20px;}
+    .extrato {
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
 
-        .tabela{
-            width: 100%;
-            margin-right: 20px;
-            border: 1px solid rgba(0,0,0,0.2);
-            box-sizing: border-box;
-            border-collapse: collapse;
-            width: 100%;
-            justify-items: center;
-            text-align: center;
-            }
-        #relatoriopdf {
-        display: block !important;
-        }
+    .extrato ul {
+      list-style: none;
+      margin-right: 20px;
+    }
 
-        .co-esq{
-            justify-content: left;
-        
-        }
+    .extrato li {
+      font-size: 25px;
+    }
 
-       
+    .extrato select {
+      width: 250px;
+      min-height: 30px;
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 5px;
+    }
 
-        
-        
-    
+    .extrato button {
+      margin-top: 15px;
+      margin-bottom: 10px;
+      background-color: #6191c5;
+      width: 121px;
+      min-height: 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 15px;
+      color: white;
+    }
+
+    .tabela {
+      border: 1px solid rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .tabela th,
+    .tabela td {
+      padding: 10px;
+    }
+
     @media (min-width:900px) {
-        .conteiner{
-            margin-top: 20px;
-            display: flex;
-            font-family: 'Roboto', sans-serif;
-            align-items: flex-start;
-            }
-        .tabela{
-            
-            margin-left: 20px;
-            margin-right: 20px;
-            border: 1px solid rgba(0,0,0,0.2);
-            
-            
-            }
-        .tabela td{
+      .conteiner {
+        display: flex;
+        align-items: flex-start;
+      }
 
-            padding-left: 80px;
-            padding-right: 80px;}
-        
+      .tabela {
+        margin: 0 20px;
+      }
 
+      .tabela th,
+      .tabela td {
+        padding: 20px 80px;
+      }
     }
 
+    /* ===== MOBILE ===== */
     @media (max-width:900px) {
-        .tabela td{
 
-            padding-left: 40px;
-            padding-right: 40px;}
-        
+      table, thead, tbody, tr {
+        display: block;
+        width: 100%;
+      }
 
-    
-        
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 12px;
+        background: #fff;
+      }
+
+      td {
+        display: block;
+        border: none;
+        padding: 4px 0;
+        text-align: left;
+      }
+
+      td.desc {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      td.valor {
+        color: #2e7d32;
+        font-weight: bold;
+      }
+
+      td.dia,
+      td.parcela {
+        font-size: 14px;
+        color: #555;
+      }
     }
 
+    /* ===== PDF ===== */
+    @media print {
+      thead {
+        display: table-header-group;
+      }
 
-    </style>
-
-
-
-
-
+      table, thead, tbody, tr, td, th {
+        display: table;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <nav class="navbar" id="navbar">
-        <button class="menu-toggle" aria-label="Abrir menu"> ☰</button>
-        <ul class="menu">
-            <li><a href="dashboard.html">dashboard</a></li>
-            <li><a href="despesas.html">Despesas</a></li>
-            <li><a href="relatorios.html">relatorios</a></li>
-            <li class="Account"><a href="conta.html">conta</a></li>
-        </ul>
-    </nav>
-    <div class="conteiner">
-        <div class="extrato">
-            <ul>
-                <h1 class="titulo-interno">Extrato de despesas</h1>
-                <li>
-                    intevalo <br>
-                    <select name="" id="selectLucro">
-                        <option value="30">30 dias</option>
-                        <option value="60">60 dias</option>
-                        <option value="90">90 dias</option>
-                        <option value="180">180 dias</option>
-                        
-                    </select>
-                </li>
-               
-                </li>
-                <li>
-                    <button id="btn_gastos_relatorio"    type="button">Gerar relatorio</button>
-                    <button id="btn_gastos_pdf"    type="button" style="display: none;">Gerar PDF</button>
-                </li>
-            </ul>
-            <ul>
-                <h1>Extrato de Lucros</h1>
-                <li>
-                    intevalo <br>
-                    <select id="select_despesas">
-                        <option value="30">30 dias</option>
-                        <option value="60">60 dias</option>
-                        <option value="90">90 dias</option>
-                        <option value="180">180 dias</option>
-                    </select>
-                </li>
-                
-                <li>
-                    <button id="btn_lucro_relatorio"   type="button">Gerar relatorio</button>
-                    <button id="btn_lucro_pdf" type="button" style="display: none;">Gerar PDF</button>
-                </li>
-            </ul>
 
-        </div>
-        
-        <table class="tabela" id="relatoriopdf">
-            <thead>
-                <tr class="cabecalho">
-                    <td>descrição</td>
-                    <td>valor</td>
-                    <td>dia</td>
-                
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                
-            </tbody>
-        </table>
+  <nav class="navbar" id="navbar">
+    <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+    <ul class="menu">
+      <li><a href="dashboard.html">dashboard</a></li>
+      <li><a href="despesas.html">Despesas</a></li>
+      <li><a href="relatorios.html">relatórios</a></li>
+      <li class="Account"><a href="conta.html">conta</a></li>
+    </ul>
+  </nav>
 
+  <div class="conteiner">
 
+    <div class="extrato">
+      <ul>
+        <h1>Extrato de despesas</h1>
+        <li>
+          intervalo <br>
+          <select id="selectLucro">
+            <option value="1">30 dias</option>
+            <option value="2">60 dias</option>
+            <option value="3">90 dias</option>
+            <option value="6">180 dias</option>
+          </select>
+        </li>
+        <li>
+          <button id="btn_gastos_relatorio">Gerar relatório</button>
+          <button id="btn_gastos_pdf" style="display:none">Gerar PDF</button>
+        </li>
+      </ul>
 
+      <ul>
+        <h1>Extrato de Lucros</h1>
+        <li>
+          intervalo <br>
+          <select id="select_despesas">
+            <option value="1">30 dias</option>
+            <option value="2">60 dias</option>
+            <option value="3">90 dias</option>
+            <option value="6">180 dias</option>
+          </select>
+        </li>
+        <li>
+          <button id="btn_lucro_relatorio">Gerar relatório</button>
+          <button id="btn_lucro_pdf" style="display:none">Gerar PDF</button>
+        </li>
+      </ul>
     </div>
 
-    <script src="js/html2pdf.js"></script>
-    <script type="module" src="js/relatorios.js" defer></script> 
-    <script type="module" src="/js/span.js" defer></script>
+    <table class="tabela" id="relatoriopdf">
+      <thead>
+        <tr>
+          <th class="desc">Descrição</th>
+          <th class="valor">Valor</th>
+          <th class="dia">Dia</th>
+          <th class="parcela">Parcelamento</th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <!-- JS insere aqui -->
+      </tbody>
+    </table>
 
-    <footer class="footer">
-        <p>© <span id="spanAno"></span> - Driver finanças - <span id="spanversão"></span><br>
-         Todos os direitos reservados</p>
-    </footer>
+  </div>
+
+  <script src="js/html2pdf.js"></script>
+  <script type="module" src="js/relatorios.js"></script>
+  <script type="module" src="/js/span.js"></script>
+
+  <footer class="footer">
+    <p>© <span id="spanAno"></span> - Driver finanças - <span id="spanversão"></span><br>
+      Todos os direitos reservados
+    </p>
+  </footer>
+
 </body>
 </html>
