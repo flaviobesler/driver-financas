@@ -7,6 +7,28 @@ const addNome = document.getElementById('addnome');
 const SalvarNome = document.getElementById('salvarNome');
 const SpanNome = document.getElementById('SpanNome');
 
+document.addEventListener('DOMContentLoaded', async () =>{
+
+  const {data, error} = await supabase
+  .from('usuarios')
+  .select('nome');
+
+  let NomeUsuario = !!data[0].nome;
+
+  const ValorNome = data[0].nome;
+  SpanNome.textContent = ValorNome;
+
+  if(!NomeUsuario){
+  apresentacao.style.display = 'none';
+  bemVindo.style.display = 'block';
+}else{
+  apresentacao.style.display = 'block';
+  bemVindo.style.display = 'none';
+};
+
+})
+
+
 nomeInput.style.display = 'none';
 SalvarNome.style.display = 'none';
 
@@ -42,26 +64,10 @@ SalvarNome.addEventListener('click', async () => {
 
 })
 
-document.addEventListener('DOMContentLoaded', async () =>{
-
-  const {data, error} = await supabase
-  .from('usuarios')
-  .select('nome');
-
-  const ValorNome = data[0].nome;
-  SpanNome.textContent = ValorNome;
-
-})
 
 
-if(SpanNome.textContent.length){
-  apresentacao.style.display = 'none';
-  bemVindo.style.display = 'block';
 
-}else{
-  apresentacao.style.display = 'block';
-  bemVindo.style.display = 'none';
-};
+
 
 
 document.getElementById('btn_ganho').addEventListener('click',add_ganho);
