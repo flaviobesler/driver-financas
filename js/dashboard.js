@@ -1,8 +1,70 @@
 import { supabase } from "./supabaseClients.js";
 
+const apresentacao = document.getElementById('apresentacao');
+const bemVindo = document.getElementById('Bem-vindo');
+const nomeInput = document.getElementById('nome');
+const addNome = document.getElementById('addnome');
+const SalvarNome = document.getElementById('salvarNome');
+const SpanNome = document.getElementById('SpanNome');
+
+nomeInput.style.display = 'none';
+SalvarNome.style.display = 'none';
+
+addNome.addEventListener('click', () =>{
+  nomeInput.style.display = 'block';
+  SalvarNome.style.display = 'inline';
+  addNome.style.display = 'none';
+
+  nomeInput.focus();
+})
+
+SalvarNome.addEventListener('click', async () => {
+
+  const {data} = await supabase
+  .from('usuarios')
+  .select('id');
+
+  const userId = data[0].id;
+  console.log(userId)
+  const { error } = await supabase
+    .from('usuarios')
+    .update({
+      nome: nomeInput.value
+    })
+    .eq('id', userId);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  SalvarNome.disabled = true;
+
+})
+
+document.addEventListener('DOMContentLoaded', async () =>{
+
+  const {data, error} = await supabase
+  .from('usuarios')
+  .select('nome');
+
+  const ValorNome = data[0].nome;
+  SpanNome.textContent = ValorNome;
+
+})
+
+
+if(SpanNome.textContent.length){
+  apresentacao.style.display = 'none';
+  bemVindo.style.display = 'block';
+
+}else{
+  apresentacao.style.display = 'block';
+  bemVindo.style.display = 'none';
+};
+
 
 document.getElementById('btn_ganho').addEventListener('click',add_ganho);
-
 async function add_ganho() {
 
     const identificacao = document.getElementById('identificacao_ganho').value;

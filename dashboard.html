@@ -61,6 +61,32 @@
     .fonte{font-size: 15px;
     
     }
+    .apresentacao{
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        margin-left: 20px;
+                    }
+    .apresentacao input{
+        margin-right: 20px;
+        width: 250px;
+        min-height: 30px;
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    .apresentacao button{
+        margin-top: 10px;
+        min-width: 100px;
+        min-height: 30px;
+        font-size: 15px;
+        color: white;
+        border: none;
+        background-color: #6191c5;
+        border-radius: 5px;
+    }
+    .parag1{
+        font-weight: bold;    
+        font-size: 35px;
+    }
 
     
    @media (min-width:900px) {
@@ -97,7 +123,8 @@
             margin-left: 20px;
             margin-right: 20px;
         }
-        
+        .apresentacao{
+        margin-top: 50px;}
     }
 </style>
 
@@ -117,8 +144,20 @@
             <li class="Account"><a href="conta.html">conta</a></li>
         </ul>
     </nav>
+
+
     <div>
-        
+        <div id="Bem-vindo" class="apresentacao">
+            <p class="parag1">👋 Bem-vindo!</p>
+            <p>Antes de continuar, como você prefere ser chamado?</p>
+            <input id="nome" type="text"><br>
+            <button id="addnome">adicionar nome</button>
+            <button id="salvarNome">salvar</button>
+        </div >
+        <div id="apresentacao" class="apresentacao">
+            <p class="parag1">Olá, <span id="SpanNome"></span> 👋</p>
+            <p>Bora organizar suas finanças?</p>
+        </div>
     </div>
 
     <div class="conteiner">
