@@ -18,9 +18,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const Spanvencimento = document.getElementById('vencimento');
     const btnsair = document.getElementById('sair');
     
+    const SpanCancelar = document.getElementById('SpanCancelar');
+    const btnCancelar = document.getElementById('cancelar');
+    const btnDesejoCancelar = document.getElementById('DesejoCancelar');
+    const SpanCancelar2 = document.getElementById('SpanCancelar2');
+    const btnManter = document.getElementById('manterAssinatura');
+    const btnRedefinir = document.getElementById('redefinirSenha');
+    
 
 InputNome.style.display = 'none';
 btnSalvar.style.display = 'none';
+SpanCancelar.style.display = 'none';
+btnDesejoCancelar.style.display = 'none';
+SpanCancelar2.style.display = 'none';
+btnManter.style.display = 'none';
 
 document.addEventListener('DOMContentLoaded', async () =>{
 
@@ -83,8 +94,58 @@ document.addEventListener('DOMContentLoaded', async () =>{
     }
 
 
+btnCancelar.addEventListener('click',  () => {
+    btnRedefinir.style.display= 'none';
+    btnCancelar.style.display = 'none';
+
+    btnDesejoCancelar.style.display = 'block';
+    btnManter.style.display = 'block';
+
+    SpanCancelar.style.display = 'block';
+    SpanCancelar2.style.display = 'block';
+
+    SpanCancelar.style.color = 'red';
+    SpanCancelar2.style.color = 'red';
+    SpanCancelar2.style.fontWeight = 'bold';
+
+    SpanCancelar.textContent = 'tem certeza que deseja cancelar sua assinatura?'
+    SpanCancelar2.textContent = 'Para voltar, será necessário assinar novamente'
 
 
+})
+
+btnManter.addEventListener('click', () => {
+    btnRedefinir.style.display= 'block';
+    btnCancelar.style.display = 'block';
+
+    btnDesejoCancelar.style.display = 'none';
+    btnManter.style.display = 'none';
+
+    SpanCancelar.style.display = 'none';
+    SpanCancelar2.style.display = 'none';
+})
+
+btnDesejoCancelar.addEventListener('click', async () => {
+
+    const {error: updadeError} = await supabase
+    .from('usuarios')
+    .update({
+        status: 'cancelado'
+    })
+    .eq('id', userId);
+
+    if(updadeError){
+        console.error(updadeError);
+        return;}
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+        console.error(error);
+        return;}
+  window.location.href = '/login.html';
+
+
+})
 btnsair.addEventListener('click', async () => {
   const { error } = await supabase.auth.signOut();
 
@@ -95,11 +156,6 @@ btnsair.addEventListener('click', async () => {
 
   window.location.href = '/login.html';
 });
-
-
-
-
-
 
 
 

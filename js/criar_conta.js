@@ -6,6 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('signup-form');
   const msg = document.getElementById('msg');
   const btnSubmit = document.getElementById('submit');
+  const SpanEmail = document.getElementById('spanEmail');
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const password2 = document.getElementById('password2').value;
+  const InputEmail = document.getElementById('email');
+
+
+  InputEmail.addEventListener('input', ()=>{
+    SpanEmail.textContent = 'verifique se o email está escrito corretamente';
+    SpanEmail.style.color = 'orange';
+
+  })
+
+
+
+  
+
+
 
 
   function validarSenha(password){
@@ -45,10 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const password2 = document.getElementById('password2').value;
-
       if(password!==password2){
         msg.textContent ='as senhas não são iguais'
         msg.style.color = 'red';
@@ -74,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
       msg.textContent = error.message;
       return;
     }
-
     msg.textContent = 'Conta criada. Verifique seu e-mail.';
     msg.style.color = 'green';
 
