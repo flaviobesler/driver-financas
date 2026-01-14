@@ -48,7 +48,7 @@ async function add_avulso() {
     document.getElementById('id_avulso').value="";
     document.getElementById('valor_avulso').value="";
     document.getElementById('pag_avulso').value="pix";
-
+    document.getElementById('btn_avulso').disabled = true;
     alert('despesa registrada com sucesso')
 }
 
@@ -85,12 +85,13 @@ async function add_fixo(){
     document.getElementById('id_fixo').value='';
     document.getElementById('valor_fixo').value='';
     document.getElementById('venci_fixo').value='';
-
+    document.getElementById('btn_fixo').disabled = true;
     alert('despesa registrada com sucesso')
     }
 
-document.querySelectorAll('.btn_recor').forEach(botao => {
+    document.querySelectorAll('.btn_recor').forEach(botao => {
     botao.addEventListener('click', add_recorrencia);
+
 })
 
 async function add_recorrencia(event) {

@@ -28,6 +28,7 @@ async function add_ganho() {
     document.getElementById('valor_ganho').value="";
 
     alert('lucro registrada com sucesso!')
+    document.getElementById('btn_ganho').disabled = true;
 }
 
 
@@ -50,6 +51,7 @@ async function add_meta() {
     return; }
 
   alert('Meta salva com sucesso');
+  document.getElementById('btn_registrar').disabled = true;
 }
 
 function formatarReal(valor){

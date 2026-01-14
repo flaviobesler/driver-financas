@@ -78,29 +78,35 @@
     <div class="geral">
         <h1>Sua conta</h1>
         <ul class="nome">
-            <li>nome</li>
+            <li >nome: <span id="nome"></span></li>
+
             <li><button type="button">editar</button></li>
-            <li>email</li>
-            <li>status da assinatura</li>
+            
+            <li>email: <span id="email"></span></li>
+
+            <li>status da assinatura <span id="status"></span></li>
+
             <li>vencimento</li>
         </ul>
         <ul class="botao">
-            <li><button>alterar senha</button></li>
+            <li><button id="redefinirSenha"><a href="re_senha.html">alterar senha</a></button></li>
             <li><button>cancelar assinatura</button></li>
         </ul>
+        
         <ul class="signout">
-            <li><button>Sign out</button></li>
+            <li><button id="sair">Sign out</button></li>
         </ul>
 
     </div>
 
-    <script type="module" src="/js/span.js" defer></script>
+>   <script type="module" src="/js/span.js"></script>
+    <script type="module" src="/js/profiles.js" defer></script>
     
     <footer class="footer">
-        <p>© 2026 - Driver finanças - <span id="spanversão"></span><br>
+        <p>© <span id="spanAno"></span> - Driver finanças - <span id="spanversão"></span><br>
          Todos os direitos reservados</p>
     </footer>
-
+    
 
 </body>
 </html>
