@@ -5,6 +5,7 @@ import { supabase } from "./supabaseClients.js";
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('signup-form');
   const msg = document.getElementById('msg');
+  const btnSubmit = document.getElementById('submit');
 
 
   function validarSenha(password){
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
   })
-
+  btnSubmit.addEventListener('click', async () =>{ 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -77,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     msg.textContent = 'Conta criada. Verifique seu e-mail.';
     msg.style.color = 'green';
 
-  
+  btnSubmit.disabled = true;
 
   });
 });
 
-
+})

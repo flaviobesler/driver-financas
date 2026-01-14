@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       span.textContent = '';
       }
   })
-
+    const btnRedefinir = document.getElementById('redefinir');
     document.getElementById('login').style.display = 'none';
     document.getElementById('redefinir').addEventListener('click', async () => {
         
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         }
         document.getElementById('redefinir').style.display = 'none';
         document.getElementById('login').style.display = 'block';
-        
+        btnRedefinir.disabled = true;
 
     })
 

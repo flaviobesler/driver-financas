@@ -2,9 +2,12 @@ import { supabase } from "./supabaseClients.js";
 
 console.log('js carregou');
 
-document.getElementById('recuperar').addEventListener('click', async () => {
+const btnRecuperar = document.getElementById('recuperar');
+
+    btnRecuperar.addEventListener('click', async () => {
     const email = document.getElementById('email').value;
     const span = document.getElementById('span');
+    
 
     
 
@@ -19,5 +22,5 @@ document.getElementById('recuperar').addEventListener('click', async () => {
             span.textContent='Email enviado! Verifique sua caixa de entrada'
         }
     
-    
+    btnRecuperar.disabled = true;
 });
