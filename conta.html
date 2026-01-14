@@ -36,11 +36,11 @@
             margin-top: 100px;
             gap: 20px;
         }
-        .botao button{  
+        .botao button, .botao button a{  
             border: none;
             border-radius: 5px;
             width: 200px;
-            
+            text-decoration: none;
             min-height: 30px;
             color: white;
             background-color: #6191c5;}
@@ -51,8 +51,9 @@
         .signout{
             list-style: none;
         }
-        .signout button{
+        .signout button, .signout button a{
             border: none;
+            text-decoration: none;
             background-color: #6191c5;
             width: 200px;
             min-height: 30px;
@@ -79,14 +80,15 @@
         <h1>Sua conta</h1>
         <ul class="nome">
             <li >nome: <span id="nome"></span></li>
-
-            <li><button type="button">editar</button></li>
+            <input type="text" id="InputNome">
+            <li><button id="btnEditar" type="button">editar</button>
+                <button id="btnSalvar" type="button">salvar</button></li>
             
             <li>email: <span id="email"></span></li>
 
-            <li>status da assinatura <span id="status"></span></li>
+            <li>status da assinatura: <span id="status"></span></li>
 
-            <li>vencimento</li>
+            <li>vencimento: <span id="vencimento"></span></li>
         </ul>
         <ul class="botao">
             <li><button id="redefinirSenha"><a href="re_senha.html">alterar senha</a></button></li>
@@ -94,7 +96,7 @@
         </ul>
         
         <ul class="signout">
-            <li><button id="sair">Sign out</button></li>
+            <li><button id="sair"><a href="login.html">Sign out</a></button></li>
         </ul>
 
     </div>
