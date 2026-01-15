@@ -7,11 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = '/login.html';
   }
 });
-
-
-
-
-
 const apresentacao = document.getElementById('apresentacao');
 const bemVindo = document.getElementById('Bem-vindo');
 const nomeInput = document.getElementById('nome');
@@ -75,6 +70,10 @@ SalvarNome.addEventListener('click', async () => {
   SalvarNome.disabled = true;
 
 })
+
+
+
+
 
 
 
@@ -163,9 +162,9 @@ document.addEventListener('DOMContentLoaded', async () =>{
   
   //reutilização da query 'meta_semanal'
 
-  const metaId = metaData.id;
+  const metaId = metaData[0].id;
   const meta = Number(metaData[0].valor);//usar [0] só com rls de desenvolvimento 'with - true' no supabase
-
+  console.log(metaId)
   const metaSpan = document.getElementById('metaValor');
   const metaInput = document.getElementById('valor_meta');
   const btnRegistrar = document.getElementById('btn_registrar');

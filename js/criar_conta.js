@@ -1,99 +1,100 @@
 import { supabase } from "./supabaseClients.js";
 
+console.log('js carregou')
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('signup-form');
-  const msg = document.getElementById('msg');
-  const btnSubmit = document.getElementById('submit');
-  const SpanEmail = document.getElementById('spanEmail');
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const password2 = document.getElementById('password2').value;
-  const InputEmail = document.getElementById('email');
+//dados do formulario
+
+const email = document.getElementById('email');
+const senha1 = document.getElementById('password');
+const senha2 = document.getElementById('password2');
+
+//spans
+
+const spanemail = document.getElementById('spanEmail');
+const span = document.getElementById('msg');
+const span2 = document.getElementById('msg2');
+
+//formulario
+const form = document.getElementById('signup-form')
+const btnSubmit = document.getElementById('submit');
 
 
-  InputEmail.addEventListener('input', ()=>{
-    SpanEmail.textContent = 'verifique se o email está escrito corretamente';
-    SpanEmail.style.color = 'orange';
-
-  })
-
-
-
+document.addEventListener('DOMContentLoaded', () =>{
   
-
-
-
-
-  function validarSenha(password){
-      const erros = [];
-
-      if(password.length < 8){
-        erros.push( 'minimo de 8 caracteres')};
-      
-      if(!/[a-z]/.test(password)){
-         erros.push( 'uma letra minuscula')};
-      
-      if(!/[A-Z]/.test(password)){
-         erros.push( 'uma letra maiúscula')};
-      
-      if(!/\d/.test(password)){
-         erros.push( 'um número')};
-      
-      if(!/[@$!%*#?&]/.test(password)){
-         erros.push( 'um simbulo')}; 
-      return erros;
-      }
-  
-  const inputSenha = document.getElementById('password')
-  inputSenha.addEventListener('input', () =>{
-
-    const erros = validarSenha(inputSenha.value);
-    if (erros.length > 0) {
-      msg.textContent = 'A senha precisa conter:\n' + erros.join(',\n ');
-      msg.style.color = 'red';
-      }else {
-      msg.textContent = '';
-      }
-    
-
-  })
-  btnSubmit.addEventListener('click', async () =>{ 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-      if(password!==password2){
-        msg.textContent ='as senhas não são iguais'
-        msg.style.color = 'red';
-      return;}
-
-      const erros = validarSenha(password);
-      if (erros.length > 0) {
-        msg.textContent = 'Corrija a senha antes de continuar';
-        msg.style.color = 'red';
-      return;
-      }
-      
-    
-
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password
-    });
-
-
-    if (error) {
-      msg.textContent = error.message;
-      return;
-    }
-    msg.textContent = 'Conta criada. Verifique seu e-mail.';
-    msg.style.color = 'green';
-
-  btnSubmit.disabled = true;
-
+  //span do email
+  email.addEventListener('input',() =>{
+    spanemail.textContent = 'confira se o email esta escrito corretamente';
+    spanemail.style.color = 'orange';
   });
-});
 
-})
+  //validação de erros
+  function validarsenha(senha1){
+    const erros = []
+
+    if(senha1.length < 8){
+      erros.push('minimo de 8 caracteres');}
+    
+    if(!/[a-z]/.test(senha1)){
+      erros.push('uma letra minuscula')};
+    
+    if(!/[A-Z]/.test(senha1)){
+      erros.push('uma letra maiúscula')};
+
+    if(!/\d/.test(senha1)){
+      erros.push('um numero')};
+    
+    if(!/[@$!%*#?&]/.test(senha1)){
+      erros.push('um simbulo')};  
+
+    return erros;}
+  
+  //span da senha
+  senha1.addEventListener('input', () =>{
+    const erros = validarsenha(senha1.value);
+    if(erros.length > 0){
+      span.textContent = `A senha deve conter: \n` + erros.join(',\n');
+      span.style.color = 'red';}
+    else{span.textContent = '';}
+  })
+
+  //span senha 2
+  senha2.addEventListener('input', () =>{
+    if(senha1.value !== senha2.value){
+      span2.textContent = 'as senhas são diferentes';
+      span2.style.color = 'red';
+    }
+    else{
+      span2.textContent = '';}
+  })
+
+
+})//final do carregamento DOM
+
+
+//formulario de cadastro
+  btnSubmit.addEventListener('click', () =>{
+    form.addEventListener('submit', async (e) =>{
+      e.preventDefault();
+
+      const {data, error} = await supabase.auth.signUp({
+        email : email.value,
+        password: senha1.value
+      })
+    
+    if(error){
+      span.textContent = error.message;
+    }
+    else{
+      span.textContent = 'Conta criada. Verifique seu e-mail.';
+      span.style.color = 'green';
+    }
+
+    btnSubmit.disabled = true;
+
+
+    })
+
+
+
+  })
