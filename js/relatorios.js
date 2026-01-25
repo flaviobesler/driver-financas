@@ -1,5 +1,20 @@
-
+console.log('js carregou')
 import { supabase } from "./supabaseClients.js";
+const lista = document.getElementById('lista');
+const lista2 = document.getElementById('lista2');
+const tbody = document.getElementById('tbody');
+const select = document.getElementById('selectDespesas');
+const btndespesas = document.getElementById('btnDespesas');
+const btnLucro = document.getElementById('btnLucros');
+const selectLucro = document.getElementById('selectLucros');
+
+const btnPDFdespesas = document.getElementById('PDFDespesas');
+const btnPDFLucro = document.getElementById('PDFLucros')
+
+
+//desativado por enquanto
+btnPDFLucro.style.display = 'none';
+btnPDFdespesas.style.display = 'none';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const { data: { session } } = await supabase.auth.getSession();
@@ -8,9 +23,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = '/login.html';
   }
 });
-
-
-
 
 
 console.log('js carregou');
@@ -27,103 +39,228 @@ function formatarReal(valor){
 }
 
 
-//relatorio gerado no site
 
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('btn_gastos_relatorio');
-    btn.addEventListener('click',async ()  =>{ 
-
+btndespesas.addEventListener('click', async ()=>{
     const { data: datadespesa, error } = await supabase
         .from('despesas_avulsas')
         .select('*');
 
+ if (error) {
+    console.error(error);
+    return;
+    }   
+
+
+    
+function limparRelatorio() {
+  tbody.textContent = '';
+  lista.textContent = '';
+} 
+ limparRelatorio();
+
+    
+
+const pagamentos = datadespesa ;
+	
+pagamentos.forEach(item => {
+  item.valor = item.valor / item.parcelamento;
+});
+
+const meses = Number(select.value);
+
+function filtro(meses) {
+  const inicio = new Date();
+  const fim = new Date();
+
+  inicio.setHours(0, 0, 0, 0);
+  fim.setHours(23, 59, 59, 999);
+
+  inicio.setMonth(fim.getMonth() - meses);
+
+  return { inicio, fim };
+}
+
+const { inicio, fim } = filtro(meses);
+
+function filtroPagamento(inicio, fim) {
+  const resultado = [];
+  pagamentos.forEach(item => {
+    const compra = new Date(item.criado_em);
+    const parcelas = item.parcelamento;
+
+    let valido = false;
+
+    for (let i = 0; i < parcelas; i++) {
+      const dataParcela = new Date(compra);
+      dataParcela.setMonth(compra.getMonth() + i);
+
+      if (dataParcela >= inicio && dataParcela <= fim) {
+        valido = true;
+        break;
+      }
+    }
+    if (!valido) return;
+
+    if (item.forma_pagamento !== 'credito') {
+      resultado.push({
+        id: item.id,
+        descricao: item.identificacao,
+        valor: item.valor,
+        parcela: '-',
+        data: compra
+      });
+      return;
+    }
+
+   
+    for (let i = 0; i < parcelas; i++) {
+      const dataParcela = new Date(compra);
+      dataParcela.setMonth(compra.getMonth() + i);
+
+      if (dataParcela >= inicio && dataParcela <= fim) {
+        resultado.push({
+          id: item.id,
+          descricao: item.identificacao,
+          valor: item.valor,
+          parcela: `${i + 1}/${parcelas}`,
+          data: dataParcela
+        });
+      }
+    }
+  });
+
+  return resultado;
+}
+
+function limparRelatorio() {
+  tbody.textContent = '';
+  lista.textContent = '';
+}
+
+const pagamentosFiltrados = filtroPagamento(inicio, fim);
+
+//telefones
+pagamentosFiltrados.forEach(item =>{
+    const tr = document.createElement('tr')
+
+    const tdDescrição = document.createElement('td')
+    tdDescrição.textContent = item.descricao
+
+    const tdValor = document.createElement('td')
+    tdValor.textContent = item.valor
+    
+    const tdparcela = document.createElement('td')
+    tdparcela.textContent = item.parcela
+
+    const tdData = document.createElement('td')
+    tdData.textContent = item.data.toLocaleDateString('pt-BR')
+
+    const botaoExcluirdividadesk = document.createElement('button')
+    botaoExcluirdividadesk.textContent = 'excluir';
+
+    tr.append(tdDescrição, tdValor, tdparcela, tdData, botaoExcluirdividadesk)
+    tbody.appendChild(tr);
+
+    botaoExcluirdividadesk.addEventListener('click', async () => {
+    const confirmar = confirm('Deseja excluir esta despesa?');
+    if (!confirmar) return;
+
+    const { error } = await supabase
+        .from('despesas_avulsas')
+        .delete()
+        .eq('id', item.id);
+
     if (error) {
         console.error(error);
+        alert('Erro ao excluir despesa');
         return;
     }
 
-    const mesesFiltro = Number(document.getElementById('select_despesas').value);
+    tr.remove();
+    });
+})
 
-    function gerarLinhasRelatorio(datadespesa, mesesFiltro) {
-        const hoje = new Date();
-        const resultado = [];
 
-        datadespesa.forEach(item => {
-            const dataCompra = new Date(item.criado_em);
+pagamentosFiltrados.forEach(item => {
+    //criação lista1
+    const dl = document.createElement('dl');
+    const dtDescricao = document.createElement('dt');
+    dtDescricao.textContent = 'descrição';
+   
 
-            // NÃO PARCELADO
-            if (item.forma_pagamento !== 'credito' || !item.parcelamento) {
-                resultado.push({
-                    descricao: item.identificacao,
-                    valor: item.valor,
-                    data: dataCompra,
-                    parcela: '-'
-                });
-                return;
-            }
+    const ddDescricao = document.createElement('dd')
+    ddDescricao.textContent = item.descricao;
 
-            // PARCELADO
-            const totalParcelas = Number(item.parcelamento);
-            const valorParcela = item.valor / totalParcelas;
+    const dtValor = document.createElement('dt')
+    dtValor.textContent = 'valor'
 
-            for (let i = 0; i < totalParcelas; i++) {
-                const dataParcela = new Date(dataCompra);
-                dataParcela.setMonth(dataCompra.getMonth() + i);
+    const ddValor = document.createElement('dd')
+    ddValor.textContent = `R$ ${item.valor}`
 
-                const diffMeses =
-                    (dataParcela.getFullYear() - hoje.getFullYear()) * 12 +
-                    (dataParcela.getMonth() - hoje.getMonth());
+    dl.append(dtDescricao, ddDescricao, dtValor, ddValor)
+    //criação lista2
+    const dl2 = document.createElement('dl');
 
-                if (diffMeses < 0 || diffMeses >= mesesFiltro) continue;
+    const dtParcela = document.createElement('dt');
+    dtParcela.textContent = 'parcela';
 
-                resultado.push({
-                    descricao: item.identificacao,
-                    valor: valorParcela,
-                    data: dataParcela,
-                    parcela: `${i + 1}/${totalParcelas}`
-                });
-            }
-        });
+    const ddParcela = document.createElement('dd')
+    ddParcela.textContent = item.parcela
 
-        return resultado;
+    const dtData = document.createElement('dt');
+    dtData.textContent = 'data';
+
+    const ddData = document.createElement('dd')
+    ddData.textContent = item.data.toLocaleDateString('pt-BR')
+    dl2.append(dtParcela, ddParcela, dtData, ddData)
+
+
+    //uma div para centralizar
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('listas')
+    
+    const botaoExcluirdivida = document.createElement('button')
+    botaoExcluirdivida.textContent = 'excluir'
+    
+    wrapper.append(dl, dl2)
+    lista.append(wrapper, botaoExcluirdivida)
+    // ativar_botãoExcluir
+
+
+    botaoExcluirdivida.addEventListener('click', async () => {
+    const confirmar = confirm('Deseja excluir esta despesa?');
+    if (!confirmar) return;
+
+    const { error } = await supabase
+        .from('despesas_avulsas')
+        .delete()
+        .eq('id', item.id);
+
+    if (error) {
+        console.error(error);
+        alert('Erro ao excluir despesa');
+        return;
     }
 
-    const linhas = gerarLinhasRelatorio(datadespesa, mesesFiltro);
-
-    const tabela = document.querySelector('.tbody');
-    tabela.textContent = '';
-
-    linhas.forEach(item => {
-        const tr = document.createElement('tr');
-
-        const tdNome = document.createElement('td');
-        tdNome.textContent = item.descricao;
-
-        const tdValor = document.createElement('td');
-        tdValor.textContent = formatarReal(item.valor);
-
-        const tdDia = document.createElement('td');
-        tdDia.textContent = item.data.toLocaleDateString('pt-BR');
-
-        const tdParcela = document.createElement('td');
-        tdParcela.textContent = item.parcela;
-
-        tr.append(tdNome, tdValor, tdDia, tdParcela);
-        tabela.appendChild(tr);
+    // remove da tela
+    wrapper.remove();
+    botaoExcluirdivida.remove();
     });
-
-    document.getElementById('btn_gastos_pdf').style.display = 'block';
-    document.getElementById('btn_lucro_pdf').style.display = 'none';
-    });
-});
-
-
-
-document.getElementById('btn_lucro_relatorio').addEventListener('click', gerar_lucro);
-
-async function gerar_lucro() {
     
-    const {data: dataGanho, error: errorGanho} = await supabase
+
+  
+})
+btndespesas.disabled = true
+})
+//btnExcluir
+
+
+
+
+
+//lucros
+btnLucro.addEventListener('click', async()=>{
+const {data: dataGanho, error: errorGanho} = await supabase
     .from('ganhos_do_dia')
     .select('*')
 
@@ -131,91 +268,166 @@ async function gerar_lucro() {
         console.error(errorGanho)
     }
 
-    const dias = Number(document.getElementById('selectLucro').value);
+
+const pagamentos = dataGanho;
+
+
+const meses = Number(selectLucro.value);
+
+function filtro(meses) {
+  const inicio = new Date();
+  const fim = new Date();
+
+  inicio.setHours(0, 0, 0, 0);
+  fim.setHours(23, 59, 59, 999);
+
+  inicio.setMonth(fim.getMonth() - meses);
+
+  return { inicio, fim };
+}
+
+const { inicio, fim } = filtro(meses);
+
+console.log(inicio)
+console.log(fim)
+
+function filtroPagamentos(inicio, fim){
+    const resultado = [];
+    pagamentos.forEach(item => {
+        const compra = new Date(item.criado_em);
+        if(compra >= inicio && compra <= fim){
+            resultado.push({
+            id: item.id,
+            descricao: item.identificacao,
+            valor: item.valor,
+            parcela: '-',
+            data: compra
+            })
+        }
+
+    })
+    return resultado;
+}
+
+function limparRelatorio() {
+  tbody.textContent = '';
+  lista.textContent = '';
+} 
+ limparRelatorio();
 
 
 
-    function calcularIntervalo(dias){
-        const fim = new Date(); // lembrar que inicio e fim tem que ser const(isso não é python)
-        const inicio = new Date();
+const pagamentosFiltrados = filtroPagamentos(inicio, fim)
 
-        inicio.setDate(fim.getDate()- dias);
-        inicio.setHours(0,0,0,0);
-        fim.setHours(23,59,59,999);
-        return {inicio, fim};
+pagamentosFiltrados.forEach(item =>{
+    const tr = document.createElement('tr')
 
+    const tdDescrição = document.createElement('td')
+    tdDescrição.textContent = item.descricao
+
+    const tdValor = document.createElement('td')
+    tdValor.textContent = item.valor
+    
+    const tdparcela = document.createElement('td')
+    tdparcela.textContent = item.parcela
+
+    const tdData = document.createElement('td')
+    tdData.textContent = item.data.toLocaleDateString('pt-BR')
+
+    const botaoExcluirlucro = document.createElement('button')
+    botaoExcluirlucro.textContent = 'excluir';
+
+    tr.append(tdDescrição, tdValor, tdparcela, tdData, botaoExcluirlucro)
+    tbody.appendChild(tr);
+
+    botaoExcluirlucro.addEventListener('click', async () => {
+    const confirmar = confirm('Deseja excluir esta despesa?');
+    if (!confirmar) return;
+
+    const { error } = await supabase
+        .from('ganhos_do_dia')
+        .delete()
+        .eq('id', item.id);
+
+    if (error) {
+        console.error(error);
+        alert('Erro ao excluir despesa');
+        return;
     }
 
-
-
-    const {inicio, fim} = calcularIntervalo(dias);
-    
-    const lucroFiltrado = dataGanho.filter(g =>{
-        const data = new Date(g.criado_em);
-        return data >= inicio && data<=fim;
-    })
-
-
-
-    const tabela = document.querySelector('.tbody');
-    tabela.textContent='';
-
-    lucroFiltrado.forEach (item => {
-        const tr = document.createElement('tr');
-       tr.classList.add("linha_banco")
-
-                const tdNome = document.createElement('td');
-                tdNome.className = 'coluna_nome';
-                tdNome.textContent = item.identificacao;
-
-                const tdValor = document.createElement('td');
-                tdValor.className = 'coluna_nome';
-                tdValor.textContent = formatarReal(item.valor);
-
-                const tdDia = document.createElement('td');
-                tdDia.className = 'coluna_nome';
-                tdDia.textContent = item.dia_vencimento;
-
-                tr.append(tdNome, tdValor, tdDia);
-                tabela.appendChild(tr);
-    })
-    
-    document.getElementById('btn_lucro_pdf').style.display = 'block';
-    document.getElementById('btn_gastos_pdf').style.display = 'none';
-}
-
-
-
-
-
-document.getElementById("btn_gastos_pdf").addEventListener('click',gerargastoPDF);
-
-function gerargastoPDF() {
-  const relatorio = document.getElementById('relatoriopdf');
-
-    setTimeout(()=> { // sempre lembrar de colocar essa linha...
-    html2pdf() .from(relatorio).set({
-        margin: 10,
-        filename: 'relatorio de gastos.pdf',
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['css', 'legacy'] }}).save();
-        },100); //... e essa linha para imprimir 100% do relatorio, caso contrario, o js não termina de carregar e fica cortando linhas
-
-}
-
-document.getElementById("btn_lucro_pdf").addEventListener('click',gerarPDF);
-function gerarPDF() {
-    const relatorio2 = document.getElementById('relatoriopdf');
+    tr.remove();
+    });
 
     
-    setTimeout(()=> {
-    html2pdf() .from(relatorio2).set({
-        margin: 10,
-        filename: 'relatorio de lucros.pdf',
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait'},
-        pagebreak: { mode: ['css', 'legacy'] }
-    }).save();
-    },100);
-}
+    
+})
+
+
+pagamentosFiltrados.forEach(item => {
+    //criação lista1
+    const dl = document.createElement('dl');
+    const dtDescricao = document.createElement('dt');
+    dtDescricao.textContent = 'descrição';
+   
+
+    const ddDescricao = document.createElement('dd')
+    ddDescricao.textContent = item.descricao;
+
+    const dtValor = document.createElement('dt')
+    dtValor.textContent = 'valor'
+
+    const ddValor = document.createElement('dd')
+    ddValor.textContent = `R$ ${item.valor}`
+
+    dl.append(dtDescricao, ddDescricao, dtValor, ddValor)
+    //criação lista2
+    const dl2 = document.createElement('dl');
+
+    const dtParcela = document.createElement('dt');
+    dtParcela.textContent = 'parcela';
+
+    const ddParcela = document.createElement('dd')
+    ddParcela.textContent = item.parcela
+
+    const dtData = document.createElement('dt');
+    dtData.textContent = 'data';
+
+    const ddData = document.createElement('dd')
+    ddData.textContent = item.data.toLocaleDateString('pt-BR')
+    dl2.append(dtParcela, ddParcela, dtData, ddData)
+
+
+    //uma div para centralizar
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('listas')
+    
+    const botaoExcluirlucro = document.createElement('button')
+    botaoExcluirlucro.textContent = 'excluir'
+    
+    wrapper.append(dl, dl2)
+    lista.append(wrapper, botaoExcluirlucro)
+
+    botaoExcluirlucro.addEventListener('click', async () => {
+    const confirmar = confirm('Deseja excluir esta despesa?');
+    if (!confirmar) return;
+
+    const { error } = await supabase
+        .from('ganhos_do_dia')
+        .delete()
+        .eq('id', item.id);
+
+    if (error) {
+        console.error(error);
+        alert('Erro ao excluir despesa');
+        return;
+    }
+
+    // remove da tela
+    wrapper.remove();
+    botaoExcluirlucro.remove();
+    });
+  
+})
+btnLucro.disabled = true
+})
+
