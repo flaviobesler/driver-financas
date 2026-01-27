@@ -186,6 +186,7 @@ pagamentosFiltrados.forEach(item =>{
         alert('Erro ao excluir despesa');
         return;
     }
+    alert('atualize a pagina')
 
     tr.remove();
     });
