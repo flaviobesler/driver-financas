@@ -1,5 +1,16 @@
 console.log('js carregou')
 import { supabase } from "./supabaseClients.js";
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (!session) {
+    window.location.href = '/login.html';
+  }
+});
+
+
+
 const lista = document.getElementById('lista');
 const lista2 = document.getElementById('lista2');
 const tbody = document.getElementById('tbody');

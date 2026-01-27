@@ -156,10 +156,7 @@
             height: 460px;
             }
 
-        .table td,
-        .table tbody{
-        padding-left: 20px;
-        padding-right: 20px;}
+       
 
        
     }
@@ -238,7 +235,6 @@
     <div class="conteudo">
         <!--despesa avulsa-->
         <div class="box">
-            
             <ul class="itens">
                 <h1 class="titulo-interno">Despesa recorrente variavel</h1>
                 <li>
@@ -247,7 +243,6 @@
                             type="text" 
                             placeholder="agua/luz, gasolina, manutenção">
                 </li>
-                    
                 <li>
                     valor <br>
                     <input  id="valor_avulso" 
@@ -319,13 +314,18 @@
                             <tr class="linha-info">                            
                                     <td >despesa</td>
                                     <td >valor</td>
-                                    <td >vencimento</td>            
+                                    <td >vencimento</td>
+                                    <td></td>            
                             </tr>
                             <tbody id="dadosBanco"></tbody>
                     </table>
                 </div>  
                 
             </div>
+                <div class="mobile">
+                    <div class="lista" id="lista"></div>
+                </div>
+    
         </div>
     <script type="module" src="js/despesas.js" defer></script> 
     <script>

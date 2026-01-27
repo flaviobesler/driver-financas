@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = '/login.html';
   }
 });
+
+
 const apresentacao = document.getElementById('apresentacao');
 const bemVindo = document.getElementById('Bem-vindo');
 const nomeInput = document.getElementById('nome');

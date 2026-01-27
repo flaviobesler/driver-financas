@@ -59,7 +59,7 @@ async function add_avulso() {
     document.getElementById('id_avulso').value="";
     document.getElementById('valor_avulso').value="";
     document.getElementById('pag_avulso').value="pix";
-    document.getElementById('btn_avulso').disabled = true;
+
     alert('despesa registrada com sucesso')
 }
 
@@ -96,7 +96,7 @@ async function add_fixo(){
     document.getElementById('id_fixo').value='';
     document.getElementById('valor_fixo').value='';
     document.getElementById('venci_fixo').value='';
-    document.getElementById('btn_fixo').disabled = true;
+
     alert('despesa registrada com sucesso')
     }
 
@@ -150,17 +150,21 @@ document.getElementById('tabelabanco').style.display = 'none';
 
 document.getElementById("mostrar_dados").addEventListener('click', carregar_fixo);
 async function carregar_fixo() {
-    const tbody = document.getElementById('dadosBanco');
-    tbody.replaceChildren();
-
 
     const {data, error} =await supabase
         .from('despesas_fixas')
-        .select('identificacao, dia_vencimento, valor')
+        .select('id, identificacao, dia_vencimento, valor')
 
+        let despesas = data
+        renderTabela()
+
+        function renderTabela(){
+            const tbody = document.getElementById('dadosBanco');
+            tbody.replaceChildren();
         
-        const valores = data.map(item => Number(item.valor));
+        const valores = despesas.map(item => Number(item.valor));
         const total = valores.reduce((acc, valor) => acc + valor,0);
+        const id = data.id;
 
         const esteMes = String(new Date().getMonth()+1).padStart(2, '0');
         console.log(esteMes)
@@ -169,7 +173,7 @@ async function carregar_fixo() {
 
 
         const tabela = document.getElementById("dadosBanco");
-        data.forEach(item => {
+        despesas.forEach(item => {
         
 
             const tr = document.createElement('tr');
@@ -188,8 +192,31 @@ async function carregar_fixo() {
                 const dia = item.dia_vencimento.slice(8,10);
                 tdDia.textContent = `${dia}/${esteMes}`;
 
-                tr.append(tdNome, tdValor, tdDia);
+                const tdbutton = document.createElement('button');
+                tdbutton.textContent = 'excluir';
+                
+
+                tr.append(tdNome, tdValor, tdDia, tdbutton);
                 tabela.appendChild(tr);
+
+                tdbutton.addEventListener('click', async()=>{
+     
+                    const {error} = await supabase
+                    .from('despesas_fixas')
+                    .delete()
+                    .eq('id', item.id)
+
+                    if(error){
+                        console.log(error);
+                        alert('erro ao excluir');
+                    }
+                    
+                    tr.remove()
+
+                    despesas = despesas.filter(d => d.id !== item.id);
+                    renderTabela();
+
+                })
            
         });
 
@@ -202,6 +229,7 @@ async function carregar_fixo() {
         trTotal.appendChild(tdTotal)
         tabela.appendChild(trTotal);
 
+    }
         
     document.getElementById('mostrar_dados').style.display = 'none';
     document.getElementById('esconder_dados').style.display = 'block';
@@ -210,9 +238,13 @@ async function carregar_fixo() {
 
 
 
+
+
+
+
+
 document.getElementById('esconder_dados').addEventListener('click', esconder_dados)
 function esconder_dados(){
-    
     
     document.getElementById('tabelabanco').style.display = 'none';
     document.getElementById('mostrar_dados').style.display = 'block';
