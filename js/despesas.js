@@ -38,6 +38,8 @@ async function add_avulso() {
         alert('preencha todos os campos');
         return;
     }
+    let lista = []
+
 
     const {data, error} = await supabase
     .from ('despesas_avulsas')

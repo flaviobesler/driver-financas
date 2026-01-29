@@ -73,7 +73,27 @@ SalvarNome.addEventListener('click', async () => {
 
 })
 
+const btnGorjeta = document.getElementById('btngorjeta');
 
+btnGorjeta.addEventListener('click', async() =>{
+  const gorjeta  = parseFloat(document.getElementById('inputGorjeta').value);
+  const identGorjeta = 'gorjeta';
+
+  const { error} = await supabase
+  .from('ganhos_do_dia')
+  .insert({
+    identificacao: identGorjeta,
+    valor: gorjeta,
+    criado_em: new Date().toISOString()
+  });
+  if(error){
+    console.log(error);
+    alert('erro ao adicionar')
+  }
+  alert ('gorjeta adicionada com sucesso')
+  btnGorjeta.disabled = true;
+
+})
 
 
 

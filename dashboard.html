@@ -19,7 +19,7 @@
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 5px;
     box-sizing: border-box;
-    height: 300px;
+
 }
     
     .lucro input,
@@ -88,6 +88,31 @@
         font-size: 35px;
     }
 
+    .gorjeta{
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    }
+    .gorjeta input{
+        margin-right: 20px;
+        width: 250px;
+        min-height: 30px;
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    .gorjeta button{
+    margin-top: 10px;
+        min-width: 100px;
+        min-height: 30px;
+        font-size: 15px;
+        color: white;
+        border: none;
+        background-color: #6191c5;
+        border-radius: 5px;}
+    .gorjeta ul{
+    list-style: none;}
+
     
    @media (min-width:900px) {
     .conteiner{
@@ -109,22 +134,34 @@
     
     .mensal{
     margin-left: 500px;}
-    
-    }
+        
+    .lucro, .meta, .gorjeta{
+            box-sizing: border-box;
+            margin-left: 20px;
+            margin-right: 20px;
+            max-width: 350px;
+        }
+    .gorjeta{
+    height: 393px;
+    margin-top: 15px;}
 
+
+    }
+    
 
     @media (max-width:900px) {
-        .conteiner{
-            padding-top: 40px;}
+
         .imagem{display: none;}
         .fonte{margin-left: 10px;}
-        .lucro, .meta{
+        .lucro, .meta, .gorjeta{
             box-sizing: border-box;
             margin-left: 20px;
             margin-right: 20px;
         }
+        
         .apresentacao{
         margin-top: 50px;}
+
     }
 </style>
 
@@ -162,9 +199,11 @@
 
     <div class="conteiner">
         <div class="lucro">
-            <h1>Ganho do dia</h1>
-            Ex: R$ 345,00 feitos hoje
+            
             <ul>
+                <h1>Lucro total do dia</h1>
+            ⚠️ Este campo é apenas para o total do dia. 
+            Não registre corridas individuais.
                 </li>
                 <li>identificação (opicional) <br>
                     <input  id="identificacao_ganho"
@@ -189,9 +228,10 @@
             <img src="fotos/faixa.jpg">
         </div>
         <div class="meta">
-            <h1>Meta semanal</h1>
-            o grafico da sua meta começa a recontar na segunda
+            
             <ul >
+                <h1>Meta semanal</h1>
+            o grafico da sua meta começa a recontar na segunda
                 <li class="first">
                     
                     <span id="metaValor" style="font-weight: bold;"></span>
@@ -213,10 +253,22 @@
                 <li>
                     faltam <span id="faltante"></span> para atingir a meta
                 </li>
-        
-                
             </ul>
-     
+        </div>
+        <div class="imagem">
+            <img src="fotos/faixa.jpg">
+        </div>
+        <div class="gorjeta">
+            
+            <ul>
+                <h1>gorjeta</h1>
+                adicione as gorjetas que ganha durante o dia
+                <br><br>
+                <li>valor <br>
+                    <input id="inputGorjeta" type="number" placeholder="R$0,00 ">
+                </li>
+                <button id="btngorjeta">registrar</button>
+            </ul>
         </div>
          
         
