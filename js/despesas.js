@@ -22,12 +22,7 @@ async function add_avulso() {
     const pagament_avulso = document.getElementById('pag_avulso').value;
     let parcelament_avulso = parseInt(document.getElementById('parcel_avulso').value);
 
-    if (
-        pagament_avulso === 'pix' ||
-        pagament_avulso === 'debito'||
-        pagament_avulso === 'dinheiro'||
-        pagament_avulso === 'outras'
-    ){parcelament_avulso = 1}
+
 
     if (pagament_avulso === 'credito' && (isNaN(parcelament_avulso) || parcelament_avulso <= 0)){
         alert ('preencha a quantidade de parcelas');
@@ -38,19 +33,54 @@ async function add_avulso() {
         alert('preencha todos os campos');
         return;
     }
-    let lista = []
+   
+function gerarParcelas({
+    identificacao,
+    valorTotal,
+    formaPagamento,
+    parcelas
+}) {
+    const hoje = new Date();
+    const valorParcela = +(valorTotal / parcelas).toFixed(2);
+    const grupo_id = crypto.randomUUID();
+
+    const lista = [];
+
+    for (let i = 0; i < parcelas; i++) {
+        const data = new Date(hoje);
+        data.setMonth(hoje.getMonth() + i);
+
+        lista.push({
+            identificacao,
+            valor: valorParcela,
+            forma_pagamento: formaPagamento,
+            parcelamento: `${i + 1}/${parcelas}`,
+            grupo_id,
+            data_parcela: data.toISOString().split('T')[0]
+        });
+    }
+
+    return lista;
+}
+
+
+    let parcelas = 1;
+
+    if (pagament_avulso === 'credito') {
+        parcelas = parcelament_avulso;
+    }
+
+    const registros = gerarParcelas({
+        identificacao: identificacao_avulso,
+        valorTotal: valor_avulso,
+        formaPagamento: pagament_avulso,
+        parcelas
+        });
 
 
     const {data, error} = await supabase
     .from ('despesas_avulsas')
-    .insert({
-        identificacao: identificacao_avulso,
-        valor: valor_avulso,
-        forma_pagamento: pagament_avulso,
-        parcelamento: parcelament_avulso,
-        criado_em: new Date().toISOString()
-        
-    })
+    .insert(registros)
 
     if (error){
         console.error(error);

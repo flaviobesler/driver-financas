@@ -29,17 +29,19 @@
             color: white;
             margin-top: 10px;
         }
-        .relatorio select{
-            width: 300px;    
-            min-height: 30px;
-            font-size: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-            margin-bottom: 10px;
+   
+        .intervalo{
+            display: flex;
+            gap: 10px;
         }
-        
-        
-
+        .intervalo input{
+            width: 140px;
+            min-height: 35px;
+            font-size: 15px;
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 5px;
+            
+        }
 
         @media (min-width: 800px) {
         .mobile{
@@ -102,7 +104,7 @@
         <ul class="menu">
             <li><a href="dashboard.html">dashboard</a></li>
             <li><a href="despesas.html">Despesas</a></li>
-            <li><a href="relatorios.html">relatorios</a></li>
+            <li><a href="relatorios.html">resumo</a></li>
             <li class="Account"><a href="conta.html">conta</a></li>
         </ul>
     </nav>
@@ -110,32 +112,33 @@
     <div class="conteiner">
         <div>
             <div class="relatorio">
-                <h2>despesas</h2>
-                intervalo
-                <select id="selectDespesas">
-                    <option value="1">30 dias</option>
-                    <option value="2">60 dias</option>
-                    <option value="3">90 dias</option>
-                    <option value="6">180 dias</option>
-                    <option value="12">ultimos 12 meses</option>
-                   
-                </select>
+                <h2>despesas</h2>  
+                <div class="intervalo">
+                    <div>
+                        de: <br>
+                        <input type="date" id="iniciodespesa">
+                    </div>
+                    <div>
+                        até: <br>
+                        <input type="date" id="fimdespesa">
+                    </div>
+                </div>
                 <button id="btnDespesas">gerar relatorio</button>
-                <button id="PDFDespesas" > <a href="pdfdespesa.html">gerar pdf</a></button>
             </div>
             <div class="relatorio">
                 <h2>lucros</h2>
-                intervalo
-                <select id="selectLucros">
-                    <option value="1">30 dias</option>
-                    <option value="2">60 dias</option>
-                    <option value="3">90 dias</option>
-                    <option value="6">180 dias</option>
-                    <option value="12">ultimos 12 meses</option>
-                   
-                </select>
+                <div class="intervalo">
+                    <div>
+                        de: <br>
+                        <input type="date" id="inicioLucro">
+                    </div>
+                    <div>
+                        até: <br>
+                        <input type="date" id="fimLucro">
+                    </div>
+                </div>
                 <button id="btnLucros">gerar relatorio</button>
-                <button id="PDFLucros">gerar pdf</button>
+
             </div>
         </div>
         <div class="desktop">

@@ -1,31 +1,5 @@
-console.log('js carregou')
 import { supabase } from "./supabaseClients.js";
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-
-  if (!session) {
-    window.location.href = '/login.html';
-  }
-});
-
-
-
-const lista = document.getElementById('lista');
-const lista2 = document.getElementById('lista2');
-const tbody = document.getElementById('tbody');
-const select = document.getElementById('selectDespesas');
-const btndespesas = document.getElementById('btnDespesas');
-const btnLucro = document.getElementById('btnLucros');
-const selectLucro = document.getElementById('selectLucros');
-
-const btnPDFdespesas = document.getElementById('PDFDespesas');
-const btnPDFLucro = document.getElementById('PDFLucros')
-
-
-//desativado por enquanto
-btnPDFLucro.style.display = 'none';
-btnPDFdespesas.style.display = 'none';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const { data: { session } } = await supabase.auth.getSession();
@@ -36,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-console.log('js carregou');
+
 function formatarDataLocal(dataUTC) {
     return new Date(dataUTC).toLocaleString('pt-BR', {
         timeZone: 'America/Sao_Paulo'});
@@ -50,8 +24,18 @@ function formatarReal(valor){
 }
 
 
+const lista = document.getElementById('lista');
+const tbody = document.getElementById('tbody');
+const btndespesas = document.getElementById('btnDespesas');
+const btnLucro = document.getElementById('btnLucros');
+
+
 
 btndespesas.addEventListener('click', async ()=>{
+    const inicioDespesa = document.getElementById('iniciodespesa').value;
+const fimDespesa = document.getElementById('fimdespesa').value;
+    
+    
     const { data: datadespesa, error } = await supabase
         .from('despesas_avulsas')
         .select('*');
@@ -68,87 +52,50 @@ function limparRelatorio() {
   lista.textContent = '';
 } 
  limparRelatorio();
-
-    
-
-const pagamentos = datadespesa ;
-	
-pagamentos.forEach(item => {
-  item.valor = item.valor / item.parcelamento;
-});
-
-const meses = Number(select.value);
-
-function filtro(meses) {
-  const inicio = new Date();
-  const fim = new Date();
-
-  inicio.setHours(0, 0, 0, 0);
-  fim.setHours(23, 59, 59, 999);
-
-  inicio.setMonth(fim.getMonth() - meses);
-
-  return { inicio, fim };
-}
-
-const { inicio, fim } = filtro(meses);
-
-function filtroPagamento(inicio, fim) {
-  const resultado = [];
-  pagamentos.forEach(item => {
-    const compra = new Date(item.criado_em);
-    const parcelas = item.parcelamento;
-
-    let valido = false;
-
-    for (let i = 0; i < parcelas; i++) {
-      const dataParcela = new Date(compra);
-      dataParcela.setMonth(compra.getMonth() + i);
-
-      if (dataParcela >= inicio && dataParcela <= fim) {
-        valido = true;
-        break;
-      }
-    }
-    if (!valido) return;
-
-    if (item.forma_pagamento !== 'credito') {
-      resultado.push({
-        id: item.id,
-        descricao: item.identificacao,
-        valor: item.valor,
-        parcela: '-',
-        data: compra
-      });
-      return;
-    }
-
    
-    for (let i = 0; i < parcelas; i++) {
-      const dataParcela = new Date(compra);
-      dataParcela.setMonth(compra.getMonth() + i);
+const inicio = new Date(inicioDespesa)
+const fim = new Date (fimDespesa)
 
-      if (dataParcela >= inicio && dataParcela <= fim) {
-        resultado.push({
-          id: item.id,
-          descricao: item.identificacao,
-          valor: item.valor,
-          parcela: `${i + 1}/${parcelas}`,
-          data: dataParcela
-        });
-      }
-    }
+inicio.setHours(0,0,0,0);
+fim.setHours(23,59,59,999);
+
+
+
+
+function gerarRelatorio(inicio, fim) {
+  const lista = [];
+
+  datadespesa.forEach(item => {
+    const pagamento = item.forma_pagamento;
+
+    // escolhe a data certa
+    const dataReferencia =
+      pagamento === 'credito'
+        ? new Date(item.data_parcela)
+        : new Date(item.criado_em);
+
+    // filtra
+    if (dataReferencia < inicio || dataReferencia > fim) return;
+
+  
+
+    lista.push({
+      id: item.id,
+      descricao: item.identificacao,
+      valor: item.valor,
+      parcela:
+        pagamento === 'credito'
+          ? `${item.parcelamento}`
+          : '-',
+      data: dataReferencia
+    });
   });
 
-  return resultado;
+  return lista;
 }
 
-function limparRelatorio() {
-  tbody.textContent = '';
-  lista.textContent = '';
-}
 
-const pagamentosFiltrados = filtroPagamento(inicio, fim);
+const pagamentosFiltrados = gerarRelatorio(inicio, fim);
 
 //telefones
 pagamentosFiltrados.forEach(item =>{
@@ -272,7 +219,12 @@ btndespesas.disabled = true
 
 //lucros
 btnLucro.addEventListener('click', async()=>{
-const {data: dataGanho, error: errorGanho} = await supabase
+
+    const inicioLucro = document.getElementById('inicioLucro').value;
+    const fimLucro = document.getElementById('fimLucro').value;
+
+
+    const {data: dataGanho, error: errorGanho} = await supabase
     .from('ganhos_do_dia')
     .select('*')
 
@@ -281,55 +233,41 @@ const {data: dataGanho, error: errorGanho} = await supabase
     }
 
 
-const pagamentos = dataGanho;
-
-
-const meses = Number(selectLucro.value);
-
-function filtro(meses) {
-  const inicio = new Date();
-  const fim = new Date();
-
-  inicio.setHours(0, 0, 0, 0);
-  fim.setHours(23, 59, 59, 999);
-
-  inicio.setMonth(fim.getMonth() - meses);
-
-  return { inicio, fim };
-}
-
-const { inicio, fim } = filtro(meses);
-
-console.log(inicio)
-console.log(fim)
-
-function filtroPagamentos(inicio, fim){
-    const resultado = [];
-    pagamentos.forEach(item => {
-        const compra = new Date(item.criado_em);
-        if(compra >= inicio && compra <= fim){
-            resultado.push({
-            id: item.id,
-            descricao: item.identificacao,
-            valor: item.valor,
-            parcela: '-',
-            data: compra
-            })
-        }
-
-    })
-    return resultado;
-}
-
-function limparRelatorio() {
+    function limparRelatorio() {
   tbody.textContent = '';
   lista.textContent = '';
 } 
  limparRelatorio();
 
+const inicio = new Date(inicioLucro);
+const fim = new Date (fimLucro);
+
+inicio.setHours(0,0,0,0);
+fim.setHours(23,59,59,999);
+
+console.log(inicio)
+console.log(fim)
 
 
-const pagamentosFiltrados = filtroPagamentos(inicio, fim)
+
+function gerarRelatorio(inicio, fim){
+    const lista  = []
+    dataGanho.forEach(item =>{
+        const dataItem = new Date(item.criado_em)
+        if(dataItem >= inicio && dataItem<= fim){
+        lista.push({
+            id: item.id,
+            descricao: item.identificacao,
+            valor: item.valor,
+            parcela: '-',
+            data: dataItem})
+        }//fim do if
+    })//fim do forEach
+    
+    return lista;
+}
+
+const pagamentosFiltrados = gerarRelatorio(inicio, fim)
 
 pagamentosFiltrados.forEach(item =>{
     const tr = document.createElement('tr')
