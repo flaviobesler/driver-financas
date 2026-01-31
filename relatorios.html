@@ -42,6 +42,7 @@
             border-radius: 5px;
             
         }
+        
 
         @media (min-width: 800px) {
         .mobile{
@@ -60,6 +61,12 @@
             background-color: #6191c5;
             border-radius: 5px;
             color: white;}
+        .span{
+        display: none;
+        }
+        .tdtotal{
+        text-align: center;
+        vertical-align: middle;}
        
             
         }/*fim desktop*/
@@ -93,6 +100,11 @@
             dt{
             font-weight: bold;
             }
+            .tdtotal{ display: none;}
+            .span{
+            
+            margin: 20px;
+        }
             
         }/*fim celular*/
 
@@ -141,6 +153,8 @@
 
             </div>
         </div>
+        <br>
+        <span class="span" id="span"></span>
         <div class="desktop">
             <table class="tabela">
                 <thead>
@@ -153,9 +167,11 @@
                         <th></th>
                     </tr>
                 </thead>
+               
                 <tbody id="tbody">
-
+                
                 </tbody>
+                
             </table>
         </div>
 
@@ -163,6 +179,7 @@
     <div class="mobile">
         <div class="lista" id="lista"></div>
     </div>
+    <br>
     
 
 

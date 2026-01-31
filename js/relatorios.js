@@ -96,7 +96,6 @@ btndespesas.addEventListener('click', async ()=>{
     }   
 
 
-    
 function limparRelatorio() {
   tbody.textContent = '';
   lista.textContent = '';
@@ -146,9 +145,36 @@ function gerarRelatorio(inicio, fim) {
 
 
 const pagamentosFiltrados = gerarRelatorio(inicio, fim);
+const valores = pagamentosFiltrados.map(item => item.valor)
+const total = valores.reduce((acc,n)=> acc+n,0) 
+console.log(total)
+
+const tr2 = document.createElement('tr')
+    
+    const tdTotal = document.createElement('td')
+    tdTotal.colSpan = 4;
+    tdTotal.className = 'tdtotal';
+    tdTotal.textContent = `total : ${total}`
+
+    tr2.append(tdTotal);
+    tbody.append(tr2)
+
+const span = document.getElementById('span');
+span.textContent =`${formatarReal(total)}`
+
+  
 
 //telefones
 pagamentosFiltrados.forEach(item =>{
+    const tr2 = document.createElement('tr')
+    
+    const tdTotal = document.createElement('td')
+    tdTotal.colSpan = 4;
+    tdTotal.className = 'tdtotal';
+    tdTotal.textContent = `total : ${total}`
+
+
+
     const tr = document.createElement('tr')
 
     const tdDescrição = document.createElement('td')
@@ -168,6 +194,8 @@ pagamentosFiltrados.forEach(item =>{
 
     tr.append(tdDescrição, tdValor, tdparcela, tdData, botaoExcluirdividadesk)
     tbody.appendChild(tr);
+
+    
 
     botaoExcluirdividadesk.addEventListener('click', async () => {
     const confirmar = confirm('Deseja excluir esta despesa?');
@@ -255,10 +283,12 @@ pagamentosFiltrados.forEach(item => {
     wrapper.remove();
     botaoExcluirdivida.remove();
     });
-    
 
-  
 })
+
+
+
+
 btndespesas.disabled = true
 })
 //btnExcluir
@@ -318,6 +348,22 @@ function gerarRelatorio(inicio, fim){
 }
 
 const pagamentosFiltrados = gerarRelatorio(inicio, fim)
+const valores = pagamentosFiltrados.map(item => item.valor)
+const total = valores.reduce((acc,n)=> acc+n,0) 
+console.log(total)
+
+const tr2 = document.createElement('tr')
+    
+    const tdTotal = document.createElement('td')
+    tdTotal.colSpan = 4;
+    tdTotal.className = 'tdtotal';
+    tdTotal.textContent = `total : ${total}`
+
+    tr2.append(tdTotal);
+    tbody.append(tr2)
+
+const span = document.getElementById('span');
+span.textContent =`${formatarReal(total)}`
 
 pagamentosFiltrados.forEach(item =>{
     const tr = document.createElement('tr')
