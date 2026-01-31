@@ -30,11 +30,61 @@ const btndespesas = document.getElementById('btnDespesas');
 const btnLucro = document.getElementById('btnLucros');
 
 
+document.addEventListener('DOMContentLoaded', () =>{
+const inicioDespesa = document.getElementById('iniciodespesa');
+const fimDespesa = document.getElementById('fimdespesa');
+const inicioLucro = document.getElementById('inicioLucro');
+const fimLucro = document.getElementById('fimLucro');
+
+
+fimDespesa.addEventListener('change', () => {
+    if (!inicioDespesa.value) {
+        alert('Preencha a data inicial primeiro');
+        fimDespesa.value = '';
+        fimDespesa.disabled = true;
+        return;
+    }
+
+    const inicio = new Date(inicioDespesa.value);
+    const fim = new Date(fimDespesa.value);
+
+    if (fim < inicio) {
+        alert('A data final não pode ser menor que a data inicial');
+        fimDespesa.value = '';
+    }
+})
+
+fimLucro.addEventListener('change', () => {
+    if (!inicioLucro.value) {
+        alert('Preencha a data inicial primeiro');
+        fimLucro.value = '';
+        fimLucro.disabled = true;
+        return;
+    }
+
+    const inicio = new Date(inicioLucro.value);
+    const fim = new Date(fimLucro.value);
+
+    if (fim < inicio) {
+        alert('A data final não pode ser menor que a data inicial');
+        fimLucro.value = '';
+    }
+})
+
+})
+
+
+
+
+
+
+
 
 btndespesas.addEventListener('click', async ()=>{
     const inicioDespesa = document.getElementById('iniciodespesa').value;
-const fimDespesa = document.getElementById('fimdespesa').value;
-    
+    const fimDespesa = document.getElementById('fimdespesa').value;
+
+ 
     
     const { data: datadespesa, error } = await supabase
         .from('despesas_avulsas')
