@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const SpanCancelar2 = document.getElementById('SpanCancelar2');
     const btnManter = document.getElementById('manterAssinatura');
     const btnRedefinir = document.getElementById('redefinirSenha');
+    const btnassinar = document.getElementById('assinar');
     
 
 InputNome.style.display = 'none';
@@ -39,12 +40,26 @@ document.addEventListener('DOMContentLoaded', async () =>{
     .from ('usuarios')
     .select('id, nome, email, status, trial_ends_at, created_et ');
 
+
+
     const userId = data[0].id;
     const nomebanco = data[0].nome
     const emailbanco = data[0].email;
     const statusbanco  = data[0].status;
     const trialEnd = data[0].trial_ends_at;
-    const criado = data[0].created_et;
+    const criado = data[0].created_et
+    console.log(criado)
+
+    if(statusbanco !== 'ativo'){
+        btnCancelar.style.display = 'none';
+        btnassinar.style.display = 'block';
+    }else{
+        btnCancelar.style.display = 'block';
+        btnassinar.style.display = 'none';
+    }
+
+
+
 
     console.log(emailbanco);
     console.log(nomebanco);
@@ -79,16 +94,16 @@ document.addEventListener('DOMContentLoaded', async () =>{
     emailSpan.textContent = emailbanco;
     statusSpan.textContent = statusbanco;
 
-    if(statusbanco === 'trial'){
-        Spanvencimento.textContent = trialEnd;
+    if(statusbanco === 'aguardando'){
+        Spanvencimento.textContent = 'aguardando pagamento';
     }
     if(statusbanco === 'cancelado'){
         Spanvencimento.textContent = 'cancelado';
         Spanvencimento.style.color = 'red';
     }
-    if(statusbanco ==='ativado'){
+    if(statusbanco ==='ativo'){
         const proximomes = String(new Date().getMonth()+2).padStart(2, '0');
-        const dia = criado.slice(8,10);
+        const dia = criado.slice(8,10)
 
         Spanvencimento.textContent =  `${dia}/${proximomes}`
     }
@@ -156,6 +171,11 @@ btnsair.addEventListener('click', async () => {
 
   window.location.href = '/login.html';
 });
+
+
+
+
+
 
 
 

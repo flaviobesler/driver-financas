@@ -7,6 +7,6 @@ if (profile.status === 'cancelado') {
   // bloquear app
 }
 
-if (profile.status === 'trial') {
-  // mostrar aviso de trial
+if (profile.status === 'aguardando') {
+  // bloquear app
 }

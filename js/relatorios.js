@@ -146,7 +146,7 @@ function gerarRelatorio(inicio, fim) {
 
 const pagamentosFiltrados = gerarRelatorio(inicio, fim);
 const valores = pagamentosFiltrados.map(item => item.valor)
-const total = valores.reduce((acc,n)=> acc+n,0) 
+let total = valores.reduce((acc,n)=> acc+n,0) 
 console.log(total)
 
 const tr2 = document.createElement('tr')
@@ -154,7 +154,7 @@ const tr2 = document.createElement('tr')
     const tdTotal = document.createElement('td')
     tdTotal.colSpan = 4;
     tdTotal.className = 'tdtotal';
-    tdTotal.textContent = `total : ${total}`
+    tdTotal.textContent = `total : ${formatarReal(total)}`
 
     tr2.append(tdTotal);
     tbody.append(tr2)
@@ -166,15 +166,6 @@ span.textContent =`${formatarReal(total)}`
 
 //telefones
 pagamentosFiltrados.forEach(item =>{
-    const tr2 = document.createElement('tr')
-    
-    const tdTotal = document.createElement('td')
-    tdTotal.colSpan = 4;
-    tdTotal.className = 'tdtotal';
-    tdTotal.textContent = `total : ${total}`
-
-
-
     const tr = document.createElement('tr')
 
     const tdDescrição = document.createElement('td')
@@ -211,7 +202,10 @@ pagamentosFiltrados.forEach(item =>{
         alert('Erro ao excluir despesa');
         return;
     }
-    alert('atualize a pagina')
+    total -= Number(item.valor);
+
+    tdTotal.textContent = `Total: ${formatarReal(total)}`;
+    span.textContent = `Total: ${formatarReal(total)}`;
 
     tr.remove();
     });
@@ -278,7 +272,10 @@ pagamentosFiltrados.forEach(item => {
         alert('Erro ao excluir despesa');
         return;
     }
+     total -= Number(item.valor);
 
+    tdTotal.textContent = `Total: ${formatarReal(total)}`;
+    span.textContent = `Total: ${formatarReal(total)}`;
     // remove da tela
     wrapper.remove();
     botaoExcluirdivida.remove();
@@ -349,7 +346,7 @@ function gerarRelatorio(inicio, fim){
 
 const pagamentosFiltrados = gerarRelatorio(inicio, fim)
 const valores = pagamentosFiltrados.map(item => item.valor)
-const total = valores.reduce((acc,n)=> acc+n,0) 
+let total = valores.reduce((acc,n)=> acc+n,0) 
 console.log(total)
 
 const tr2 = document.createElement('tr')
@@ -357,7 +354,7 @@ const tr2 = document.createElement('tr')
     const tdTotal = document.createElement('td')
     tdTotal.colSpan = 4;
     tdTotal.className = 'tdtotal';
-    tdTotal.textContent = `total : ${total}`
+    tdTotal.textContent = `total : ${formatarReal(total)}`
 
     tr2.append(tdTotal);
     tbody.append(tr2)
@@ -400,6 +397,12 @@ pagamentosFiltrados.forEach(item =>{
         alert('Erro ao excluir despesa');
         return;
     }
+       total -= Number(item.valor);
+
+        tdTotal.textContent = `Total: ${formatarReal(total)}`;
+        span.textContent = `Total: ${formatarReal(total)}`;
+
+
 
     tr.remove();
     });
@@ -468,6 +471,10 @@ pagamentosFiltrados.forEach(item => {
         return;
     }
 
+    total -= Number(item.valor);
+
+    tdTotal.textContent = `Total: ${formatarReal(total)}`;
+    span.textContent = `Total: ${formatarReal(total)}`;
     // remove da tela
     wrapper.remove();
     botaoExcluirlucro.remove();
