@@ -1,12 +1,21 @@
-const { data: profile } = await supabase
-  .from('profiles')
-  .select('status, trial_ends_at')
-  .single();
+import { supabase } from "./supabaseClients.js";
+document.addEventListener('DOMContentLoaded', async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    window.location.href = '/login.html';
+    return;
+  }
 
-if (profile.status === 'cancelado') {
-  // bloquear app
-}
+  const { data: profile, error } = await supabase
+    .from('usuarios')
+    .select('status')
+    .single();
 
-if (profile.status === 'aguardando') {
-  // bloquear app
-}
+  if (error || !profile || profile.status === 'cancelado' || profile.status === 'aguardando') {
+    window.location.href = '/assinar.html';
+    return;
+  }
+
+  // habilitar botão assinar
+  document.getElementById('assinar').addEventListener('click', assinar);
+});

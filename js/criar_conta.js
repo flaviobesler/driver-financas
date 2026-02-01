@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () =>{
       const {data, error} = await supabase.auth.signUp({
         email : email.value,
         password: senha1.value
+      },{
+        redirectTo:'https://driver-financas.vercel.app/assinar.html'
       })
     
     if(error){

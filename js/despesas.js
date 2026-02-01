@@ -1,7 +1,5 @@
 import { supabase } from "./supabaseClients.js";
 
-console.log("despesas.js carregado");
-
 document.addEventListener('DOMContentLoaded', async () => {
   const { data: { session } } = await supabase.auth.getSession();
 

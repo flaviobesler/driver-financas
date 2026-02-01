@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>redirect</title>
+    <style>
+        body {
+    display: flex;
+    font-family: 'roboto', sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  /* Estilo do spinner */
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #ccc;          /* Cor da borda */
+    border-top: 6px solid #3498db;   /* Cor da parte animada */
+    border-radius: 50%;              /* Forma circular */
+    animation: spin 1s linear infinite; /* Animação contínua */
+  }
+
+  .geral{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+    
+@media (max-width: 768px) {
+     .titulo{
+        font-size: 20px;
+    }
+      
+        
+    }
+
+  /* Animação de rotação */
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }}
+
+    
+    </style>
+</head>
+<body>
+    <div class="geral">
+        <img src="/logo/logo4.png" width="350px">
+        <h1 id="titulo" class="titulo">redirecionando para pagamento</h1>
+        <div class="spinner" id="spinner"></div>
+        
+    </div>
+
+    <script src="/js/redirect.js" defer></script>
+    
+</body>
+</html>

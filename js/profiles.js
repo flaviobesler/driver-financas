@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
 
     const {data, error} = await supabase
     .from ('usuarios')
-    .select('id, nome, email, status, trial_ends_at, created_et ');
+    .select('id, nome, email, status, created_et ');
 
 
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
     const nomebanco = data[0].nome
     const emailbanco = data[0].email;
     const statusbanco  = data[0].status;
-    const trialEnd = data[0].trial_ends_at;
+
     const criado = data[0].created_et
     console.log(criado)
 
