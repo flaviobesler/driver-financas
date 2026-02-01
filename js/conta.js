@@ -16,6 +16,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  // habilitar botão assinar
-  document.getElementById('assinar').addEventListener('click', assinar);
+
 });
