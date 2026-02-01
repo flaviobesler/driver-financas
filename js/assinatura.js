@@ -1,3 +1,5 @@
+document.getElementById('assinar').addEventListener('click', assinar)
+
 async function assinar() {
   const res = await fetch('/api/create-checkout', {
     method: 'POST',
