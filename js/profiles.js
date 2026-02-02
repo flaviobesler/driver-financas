@@ -1,5 +1,4 @@
 import { supabase } from "./supabaseClients.js";
-console.log('js carregou');
 
 document.addEventListener('DOMContentLoaded', async () => {
   const { data: { session } } = await supabase.auth.getSession();
@@ -48,7 +47,6 @@ document.addEventListener('DOMContentLoaded', async () =>{
     const statusbanco  = data[0].status;
 
     const criado = data[0].created_et
-    console.log(criado)
 
     if(statusbanco !== 'ativo'){
         btnCancelar.style.display = 'none';
@@ -57,14 +55,6 @@ document.addEventListener('DOMContentLoaded', async () =>{
         btnCancelar.style.display = 'block';
         btnassinar.style.display = 'none';
     }
-
-
-
-
-    console.log(emailbanco);
-    console.log(nomebanco);
-    console.log(userId);
-
     
 
     //atualizar nome

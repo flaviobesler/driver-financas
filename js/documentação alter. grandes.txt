@@ -2,3 +2,8 @@
 -retirado todos os consoles.log;
 -adicionado verificação de cessão em todas as paginas dentro do app;
 -corrigido todos os alert para serem retornados como else e não soltos como estavam antes;
+-adicionado verificação de autenticação dentro de assinar
+
+2:
+- correção de loop: excluido conta.js do script em assinar.js
+-desconsiderar alterações feitas em conta.js, criar_conta.js, profiles.js

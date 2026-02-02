@@ -1,6 +1,5 @@
 import { supabase } from "./supabaseClients.js";
 
-console.log('js carregou')
 
 
 //dados do formulario
