@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         email : email.value,
         password: senha1.value
       },{
-        redirectTo:'https://driver-financas.vercel.app/assinar.html'
+        redirectTo:'https://driver-financas.vercel.app/login.html'
       })
     
     if(error){
