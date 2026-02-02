@@ -4,13 +4,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const { data: { session } } = await supabase.auth.getSession();
 
-    // Só redireciona se o usuário NÃO estiver logado **e não estiver na página de login**
     if (!session && !window.location.pathname.includes('login.html')) {
       window.location.replace('/login.html');
       return;
     }
 
-    // Aqui você pode habilitar o botão ou continuar o fluxo
     const assinarBtn = document.getElementById('assinar');
     if (assinarBtn) assinarBtn.disabled = !session;
 

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .select('status')
     .single();
 
-  if (error || !profile || profile.status === 'cancelado' || profile.status === 'aguardando') {
+  if (error || !profile || profile.status === 'aguardando') {
     window.location.href = '/assinar.html';
     return;
   }
