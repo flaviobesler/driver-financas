@@ -1,23 +1,14 @@
 import { supabase } from "./supabaseClients.js";
-
 document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await supabase.auth.getSession();
 
-    // Se não tiver sessão, redireciona imediatamente
-    if (!session) {
-      setTimeout(() => {
-        window.location.replace('/login.html');
-      }, 50); // 50ms é suficiente
-      return;
-    }
-
-    // Se tiver sessão, você pode continuar com a página normalmente
-    console.log('Usuário logado:', session.user.email);
-
-  } catch (err) {
-    console.error('Erro ao verificar sessão:', err);
-    // Redireciona mesmo em caso de erro
+  // Evita redirecionamento infinito se já estivermos na página de login
+  if (!session && window.location.pathname !== '/login.html') {
     window.location.replace('/login.html');
+    return;
+  }
+
+  if (session) {
+    console.log('Usuário logado:', session.user.email);
   }
 });
