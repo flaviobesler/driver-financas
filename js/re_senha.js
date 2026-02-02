@@ -1,7 +1,5 @@
 import { supabase } from "./supabaseClients.js";
 
-console.log('js carregou');
-
 const btnRecuperar = document.getElementById('recuperar');
 
     btnRecuperar.addEventListener('click', async () => {

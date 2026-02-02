@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
       msg.style.color = 'red';
       return;
     }
-    console.log('Sessão:', data.session);
 
     window.location.href = '/dashboard.html';
   });

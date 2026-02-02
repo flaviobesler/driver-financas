@@ -1,7 +1,5 @@
 import { supabase } from "./supabaseClients.js";
 
-console.log('js carregou')
-
 document.addEventListener('DOMContentLoaded', () =>{
     const span = document.getElementById('span');
 

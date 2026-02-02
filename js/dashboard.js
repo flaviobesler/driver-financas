@@ -56,7 +56,6 @@ SalvarNome.addEventListener('click', async () => {
   .select('id');
 
   const userId = data[0].id;
-  console.log(userId)
   const { error } = await supabase
     .from('usuarios')
     .update({
@@ -89,8 +88,10 @@ btnGorjeta.addEventListener('click', async() =>{
   if(error){
     console.log(error);
     alert('erro ao adicionar')
+  }else{
+    alert ('gorjeta adicionada com sucesso')
   }
-  alert ('gorjeta adicionada com sucesso')
+  
   btnGorjeta.disabled = true;
 
 })
@@ -123,12 +124,14 @@ async function add_ganho() {
     });
 
     if (dataGanhos || errorGanhos) {
-    alert('erro ao registrar')};
+    alert('erro ao registrar')}else{
+      alert('lucro registrada com sucesso!')
+    }
 
     document.getElementById('identificacao_ganho').value="";
     document.getElementById('valor_ganho').value="";
 
-    alert('lucro registrada com sucesso!')
+    
     document.getElementById('btn_ganho').disabled = true;
 }
 
@@ -149,9 +152,9 @@ async function add_meta() {
  
  if (errorMeta){
    console.error(errorMeta);
-    return; }
-
-  alert('Meta salva com sucesso');
+    return; }else{
+      alert('Meta salva com sucesso');
+    }
   document.getElementById('btn_registrar').disabled = true;
 }
 
@@ -186,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
 
   const metaId = metaData[0].id;
   const meta = Number(metaData[0].valor);//usar [0] só com rls de desenvolvimento 'with - true' no supabase
-  console.log(metaId)
+
   const metaSpan = document.getElementById('metaValor');
   const metaInput = document.getElementById('valor_meta');
   const btnRegistrar = document.getElementById('btn_registrar');
@@ -258,12 +261,12 @@ metadiaria.textContent = formatarReal(diaria)
 
   function getSemanaAtual(){
     const hoje = new Date(); 
-    console.log('hoje:', hoje, 'diaSemana:', hoje.getDay());
+  
     
     const diaSemana = hoje.getDay();
     // Ajusta para que a semana comece na segunda-feira
     const diffSegunda = diaSemana === 0? -6:1 - diaSemana; // se segunda (0?) começa nova semana (-6), caso contrario é (dia x da mesma semana)
-    console.log('diffSegunda:', diffSegunda);
+
 
     //definir nova semana
     const segunda = new Date(hoje);
@@ -312,8 +315,6 @@ metadiaria.textContent = formatarReal(diaria)
   
   const canvas = document.getElementById('metaChart');
   const ctx = canvas.getContext('2d');
-  console.log('Chart:', Chart);
-  console.log('canvas size:', canvas.width, canvas.height);
 
   new Chart (ctx,{
     type: 'doughnut',
@@ -341,9 +342,4 @@ metadiaria.textContent = formatarReal(diaria)
 const faltante = document.getElementById('faltante');
 faltante.textContent = (progresso.restante).toFixed(2);
 
-
 });
-
-
-
-

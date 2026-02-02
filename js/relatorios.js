@@ -1,16 +1,6 @@
 import { supabase } from "./supabaseClients.js";
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-
-  if (!session) {
-    window.location.href = '/login.html';
-  }
-});
-
-
-
 function formatarDataLocal(dataUTC) {
     return new Date(dataUTC).toLocaleString('pt-BR', {
         timeZone: 'America/Sao_Paulo'});
@@ -147,7 +137,7 @@ function gerarRelatorio(inicio, fim) {
 const pagamentosFiltrados = gerarRelatorio(inicio, fim);
 const valores = pagamentosFiltrados.map(item => item.valor)
 let total = valores.reduce((acc,n)=> acc+n,0) 
-console.log(total)
+
 
 const tr2 = document.createElement('tr')
     
@@ -322,9 +312,6 @@ const fim = new Date (fimLucro);
 inicio.setHours(0,0,0,0);
 fim.setHours(23,59,59,999);
 
-console.log(inicio)
-console.log(fim)
-
 
 
 function gerarRelatorio(inicio, fim){
@@ -347,7 +334,7 @@ function gerarRelatorio(inicio, fim){
 const pagamentosFiltrados = gerarRelatorio(inicio, fim)
 const valores = pagamentosFiltrados.map(item => item.valor)
 let total = valores.reduce((acc,n)=> acc+n,0) 
-console.log(total)
+
 
 const tr2 = document.createElement('tr')
     

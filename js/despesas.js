@@ -84,13 +84,15 @@ function gerarParcelas({
         console.error(error);
         alert('erro ao registrar');
         return;
+    }else{
+        alert('despesa registrada com sucesso')
     }
     
     document.getElementById('id_avulso').value="";
     document.getElementById('valor_avulso').value="";
     document.getElementById('pag_avulso').value="pix";
 
-    alert('despesa registrada com sucesso')
+    
 }
 
 //fixo
@@ -121,13 +123,15 @@ async function add_fixo(){
         console.error(error);
         alert('erro ao registrar');
         return;
+    }else{
+        alert('despesa registrada com sucesso')
     }
     
     document.getElementById('id_fixo').value='';
     document.getElementById('valor_fixo').value='';
     document.getElementById('venci_fixo').value='';
 
-    alert('despesa registrada com sucesso')
+    
     }
 
     document.querySelectorAll('.btn_recor').forEach(botao => {
@@ -161,12 +165,14 @@ async function add_recorrencia(event) {
         console.error(error);
         alert('Erro ao registrar!');
         return;
+    }else{
+        alert(`Despesa de ${item} registrada com sucesso!`);
     }
 
     document.getElementById(`valor_recor_${item}`).value = "";
     document.getElementById(`venci_recor_${item}`).value = "";
 
-    alert(`Despesa de ${item} registrada com sucesso!`);
+    
 }
 
 function formatarReal(valor){
@@ -197,7 +203,6 @@ async function carregar_fixo() {
         const id = data.id;
 
         const esteMes = String(new Date().getMonth()+1).padStart(2, '0');
-        console.log(esteMes)
 
 
 
@@ -283,4 +288,3 @@ function esconder_dados(){
     tbody.replaceChildren();
     
 }
-
