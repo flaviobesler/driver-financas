@@ -1,9 +1,7 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/index.html",
-      "permanent": false
-    }
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/assinar", "destination": "/index.html" },
+    { "source": "/driver_financas", "destination": "/index.html" }
   ]
 }
