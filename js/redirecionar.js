@@ -1,9 +1,11 @@
-import { supabase } from './supabaseClients.js'
+import { supabase } from './supabaseClient.js'
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const { data: { session } } = await supabase.auth.getSession()
+document.addEventListener('DOMContentLoaded', assinar)
 
-  if (!session) {
+async function assinar() {
+  const { data } = await supabase.auth.getSession()
+
+  if (!data.session) {
     window.location.href = '/login.html'
     return
   }
@@ -12,19 +14,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${session.access_token}`
+      'Authorization': `Bearer ${data.session.access_token}`
     }
   })
 
-  // 🔥 PROTEÇÃO CONTRA ERRO NÃO JSON
+  const text = await res.text()
+
   if (!res.ok) {
-    const text = await res.text()
     console.error('Erro backend:', text)
     alert('Erro ao iniciar pagamento')
     return
   }
 
-  const data = await res.json()
+  const json = JSON.parse(text)
 
-  window.location.href = data.url
-})
+  if (json.url) {
+    window.location.href = json.url
+  }
+}
