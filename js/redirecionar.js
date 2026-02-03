@@ -1,29 +1,17 @@
-import { supabase } from './supabaseClient.js'
-
-document.addEventListener('DOMContentLoaded', () => {
-  assinar()
-})
+document.addEventListener('DOMContentLoaded', assinar)
 
 async function assinar() {
-  const { data } = await supabase.auth.getSession()
-
-  if (!data.session) {
-    window.location.href = '/login.html'
-    return
-  }
-
   const res = await fetch('/api/create-checkout', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${data.session.access_token}`
+      'Content-Type': 'application/json'
     }
   })
 
-  const result = await res.json()
+  const data = await res.json()
 
-  if (result.url) {
-    window.location.href = result.url
+  if (data.url) {
+    window.location.href = data.url
   } else {
     alert('Erro ao iniciar pagamento')
   }
