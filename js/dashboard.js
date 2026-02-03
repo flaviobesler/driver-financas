@@ -1,12 +1,5 @@
 import { supabase } from "./supabaseClients.js";
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-
-  if (!session) {
-    window.location.href = '/login.html';
-  }
-});
 
 
 const apresentacao = document.getElementById('apresentacao');
@@ -136,6 +129,7 @@ async function add_ganho() {
 }
 
 
+
 document.getElementById('btn_registrar').addEventListener('click', add_meta);
 
 async function add_meta() {
@@ -158,6 +152,7 @@ async function add_meta() {
   document.getElementById('btn_registrar').disabled = true;
 }
 
+
 function formatarReal(valor){
   return new Intl.NumberFormat('pt-BR',{
     style: "currency",
@@ -165,10 +160,27 @@ function formatarReal(valor){
   }).format(valor);
 }
 
-//antes do grafico
-document.addEventListener('DOMContentLoaded', async () =>{
-  
+const mostrar = document.getElementById('mostrar');
+const esconder = document.getElementById('esconder');
+const divmeta = document.getElementById('divmeta');
 
+divmeta.style.display = 'none';
+esconder.style.display = 'none';
+
+
+esconder.addEventListener('click', ()=>{
+  divmeta.style.display = 'none';
+  esconder.style.display= 'none';
+  mostrar.style.display = 'block'
+})
+
+//antes do grafico
+
+mostrar.addEventListener('click', async ()=>{
+  divmeta.style.display = 'block';
+  mostrar.style.display = 'none';
+  esconder.style.display = 'block';
+  
   const {data:metaData, error:metaError} = await supabase
     .from('meta_semanal')
     .select('id, valor');

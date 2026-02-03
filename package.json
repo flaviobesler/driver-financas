@@ -4,6 +4,7 @@
   "description": "saas de controle financeiro simples criado para aprendizado.\r SaaS simples de controle financeiro voltado para motoristas de aplicativo, desenvolvido como **projeto de aprendizado** em JavaScript, HTML, CSS e Supabase.\r O objetivo do projeto é consolidar conceitos de frontend, autenticação, banco de dados e regras de segurança (RLS), simulando um produto real.",
   "main": "index.js",
   "dependencies": {
+    "@supabase/supabase-js": "^2.93.3",
     "chart.js": "^4.5.1",
     "stripe": "^20.3.0"
   },
@@ -13,6 +14,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flaviobesler/driver-financas.git"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "keywords": [],
   "author": "",

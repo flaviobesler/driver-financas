@@ -5,5 +5,10 @@
 -adicionado verificação de autenticação dentro de assinar
 
 2:
-- correção de loop: excluido conta.js do script em assinar.js
+- correção de loop: excluido conta.js do script em assinar.js.
+ATENSÃO ABSOLUTA: 1300 request gastas em 3 minutos, cuidar para não ocorre novamente
 -desconsiderar alterações feitas em conta.js, criar_conta.js, profiles.js
+
+3:
+-retirado 'DOMContentLoaded' do grafico e meta reduzir custos e adicionado botão que faz a função no lugar
+-teminado de adicionar pagamento

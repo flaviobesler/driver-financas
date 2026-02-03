@@ -112,9 +112,33 @@
         border-radius: 5px;}
     .gorjeta ul{
     list-style: none;}
-
     
-   @media (min-width:900px) {
+    .mostrameta{
+        width: 200px;
+        height: 35px;
+        font-size: 15px;
+        color: white;
+        border: none;
+        background-color: #2067b3;
+        border-radius: 3px;
+    }
+    .esconderMeta{
+        width: 200px;
+        height: 35px;
+        font-size: 15px;
+        color: white;
+        border: none;
+        background-color: #2067b3;
+        border-radius: 3px;
+    }
+    .esconderMeta, .mostrameta{
+            display: flex;
+            justify-self: center;
+            justify-content: center;
+            align-items: center;
+        }
+    
+   @media (min-width:769px) {
     .conteiner{
     display: flex;
     justify-content: center;
@@ -142,13 +166,18 @@
     .gorjeta{
     height: 393px;
     margin-top: 15px;}
-
+    .mostrameta{
+    margin-left: 75px;
+    margin-right: 75px;
+    }
+    .esconderMeta, .mostrameta{
+        margin-top: 20px;
+        }
 
     }
     
 
-    @media (max-width:900px) {
-
+    @media (max-width:768px) {
         .imagem{display: none;}
         .fonte{margin-left: 10px;}
         .lucro, .meta, .gorjeta{
@@ -156,7 +185,10 @@
             margin-left: 20px;
             margin-right: 20px;
         }
-        
+
+        .esconderMeta, .mostrameta{
+        margin-top: 20px;
+        }
         .apresentacao{
         margin-top: 50px;}
 
@@ -197,41 +229,48 @@
 
     <div class="conteiner">
         
+         <div>
+            <button class="mostrameta" id="mostrar"> mostrar meta</button>
+            <div class="meta" id="divmeta">            
+                <ul >
+                    
+                    <div>
+                    <h1>Meta semanal</h1>
+                o grafico da sua meta começa a recontar na segunda
+                    <li class="first">
+                        
+                        <span id="metaValor" style="font-weight: bold;"></span>
+                        <input  id="valor_meta"
+                                type="number" 
+                                placeholder="R$ 0,00">
+                    </li>
+                    <li>
+                        <button type="button" id="btn_registrar">registrar</button>
+                        <button type="button" id="btn_editar"    style="display: none;"   >editar</button>
+                        <button type="button" id="btn_editarMeta" style="display: none;">registrar</button>
+                        
+                    </li>
+                    
+                    <li class="grafico-pizza">
+                        <canvas id="metaChart" width="100px" height="100px"></canvas>
+                                        
+                    </li>
+                    <li>
+                        faltam <span id="faltante"></span> para atingir a meta
+                    </li>
+                </ul>
+                <p class="fonte">Sua meta semanal equivale a uma média <br>diária de R$ <span id="metadiaria"></span>. Use como referência.</p>
+            </div>
+            <button class="esconderMeta" id="esconder"> esconder meta</button>
+        </div><!--final div coluna-->
 
-        <div class="meta">
-            
-            <ul >
-                <h1>Meta semanal</h1>
-            o grafico da sua meta começa a recontar na segunda
-                <li class="first">
-                    
-                    <span id="metaValor" style="font-weight: bold;"></span>
-                    <input  id="valor_meta"
-                            type="number" 
-                            placeholder="R$ 0,00">
-                </li>
-                <li>
-                    <button type="button" id="btn_registrar">registrar</button>
-                    <button type="button" id="btn_editar"    style="display: none;"   >editar</button>
-                    <button type="button" id="btn_editarMeta" style="display: none;">registrar</button>
-                    
-                </li>
-                
-                <li class="grafico-pizza">
-                    <canvas id="metaChart" width="100px" height="100px"></canvas>
-                                    
-                </li>
-                <li>
-                    faltam <span id="faltante"></span> para atingir a meta
-                </li>
-            </ul>
-            <p class="fonte">Sua meta semanal equivale a uma média <br>diária de R$ <span id="metadiaria"></span>. Use como referência.</p>
-        </div>
         <div class="imagem">
             <img src="fotos/faixa.jpg">
         </div>
+
+        
+        
         <div class="lucro">
-            
             <ul>
                 <h1>Lucro total do dia</h1>
             ⚠️ Este campo é apenas para o total do dia. 
@@ -252,13 +291,14 @@
                     <button id="btn_ganho"
                             type="button"> registrar</button>
                 </li>
-        
             </ul>
-            
         </div>
         <div class="imagem">
             <img src="fotos/faixa.jpg">
         </div>
+
+
+
         <div class="gorjeta">
             
             <ul>
@@ -272,6 +312,9 @@
             </ul>
         </div>
          
+    
+       
+        
         
     </div> 
     </div>
