@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', assinar)
+document.addEventListener('DOMContentLoaded', assinar);
 
 async function assinar() {
   const res = await fetch('/api/create-checkout', {
@@ -6,13 +6,13 @@ async function assinar() {
     headers: {
       'Content-Type': 'application/json'
     }
-  })
+  });
 
-  const data = await res.json()
+  const data = await res.json();
 
   if (data.url) {
-    window.location.href = data.url
+    window.location.href = data.url;
   } else {
-    alert('Erro ao iniciar pagamento')
+    alert('Erro ao iniciar pagamento');
   }
 }
