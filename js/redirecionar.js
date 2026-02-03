@@ -1,4 +1,4 @@
-import { supabase } from './supabaseClient.js'
+import { supabase } from "./supabaseClients.js";
 
 document.addEventListener('DOMContentLoaded', assinar)
 
