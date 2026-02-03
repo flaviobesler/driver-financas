@@ -16,18 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   })
 
+  // 🔥 PROTEÇÃO CONTRA ERRO NÃO JSON
   if (!res.ok) {
     const text = await res.text()
-    console.error(text)
+    console.error('Erro backend:', text)
     alert('Erro ao iniciar pagamento')
     return
   }
 
   const data = await res.json()
 
-  if (data.url) {
-    window.location.href = data.url
-  } else {
-    alert('Erro ao iniciar pagamento')
-  }
+  window.location.href = data.url
 })
