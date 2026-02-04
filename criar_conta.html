@@ -23,6 +23,12 @@
         /* --- FORMULÁRIO ---- */
         .login {
             max-width: 350px;
+            /*apagar depois todo esse restante desse login*/
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;/*até aqui*/
         }
 
         .login img {
@@ -66,6 +72,8 @@
         #msg {
             white-space: pre-line;
         }
+
+        
         
 
         /* --- IMAGEM LADO DIREITO (PC) --- */
@@ -143,31 +151,39 @@
 </head>
 
 <body>
-
+   
     <div class="container">
 
-        <!-- FORMULÁRIO -->
+
         <div class="login">
             <img class="imagem1" src="logo/driver_finanças.png">
             <img class="imagem2" src="logo/logo4.png" alt="">
 
             <form id="signup-form">
+                 <!--
                 cadastro <br>
                 <input type="email"    id="email" placeholder="seu_email@example.com" autocomplete="email"><br>
                 <span id="spanEmail"></span>
                 <input type="password" id="password" placeholder="senha" autocomplete="new-password" required>
                 <input type="password" id="password2" placeholder="repita sua senha">
-               <!-- <input type="password" id="senha2" placeholder="repita sua senha" autocomplete="new-password">-->
+                 -->
+                 <h1>site em produção</h1>
+                <p>lançamento previsto <br>
+                    05 de junho de 2026</p>
+        
+              
                 <p id="msg"></p>
                 <p id="msg2"></p>
                 <div class="botoes">
-                <button type="submit" id="submit">registrar conta</button>
-                <button><a href="login.html">já possuo cadastro</a></button>
+                <!--<button type="submit" id="submit">registrar conta</button>-->
+                <!--<button><a href="login.html">já possuo cadastro</a></button>-->
+
+                
             </div>
             </form>
         </div>
+    
 
-        <!-- IMAGEM DO LADO DIREITO -->
         <div class="side">
             <img src="logo/logo3.png">
         </div>
@@ -175,8 +191,9 @@
         <a href="">Home</a>
         <a href="mailto:driverfinancas@gmail.com?subject=Suporte%20Driver%20Finanças">Contato</a>
     </div>
-        
 
+
+    
  
     <script type="module" src="/js/criar_conta.js" defer></script>
     
