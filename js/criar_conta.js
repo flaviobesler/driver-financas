@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 
 //formulario de cadastro
+
+/* retirar este comentario para testes de logins finais
   btnSubmit.addEventListener('click', () =>{
     form.addEventListener('submit', async (e) =>{
       e.preventDefault();
@@ -95,6 +97,8 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 
     })
+*///retirar esse comentario depois para testes finais
+
 
 
 
