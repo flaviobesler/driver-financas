@@ -1,0 +1,10 @@
+200 OK: Solicitação bem-sucedida.
+400 Bad Request: Argumento inválido (carga de solicitação inválida).
+403 Forbidden: Permissão negada (por exemplo, chave de API inválida).
+409 O erro HTTP 409 Conflict ocorre quando uma solicitação enviada ao servidor entra em conflito com o estado atual do recurso no servidor. Esse erro é comum em operações que envolvem atualização ou criação de recursos, como o método PUT.
+422, conhecido como "Unprocessable Entity", indica que o servidor entendeu a solicitação, mas não conseguiu processá-la devido a problemas semânticos nos dados enviados.
+429 Resource Exhausted: Cota de recursos excedida ou está perto de atingir a limitação de taxa.
+500 Internal Server Error: Erro interno do servidor.
+503 Service Unavailable: Indisponível.
+504 Gateway Timeout: Prazo excedido (repita a solicitação).
+Esses códigos ajudam a diagnosticar e corrigir erros de configuração do site. 

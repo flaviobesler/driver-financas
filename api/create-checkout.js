@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
           quantity: 1
         }
       ],
-      success_url: 'https://driver-financas.vercel.app/pagamento/sucesso',
+      success_url: 'https://driver-financas.vercel.app/dashboard.html',
       cancel_url: 'https://driver-financas.vercel.app/assinar.html',
       client_reference_id: user.id
     })

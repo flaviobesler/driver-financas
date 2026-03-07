@@ -1,0 +1,102 @@
+❓ “Quero uma nova lista?”
+👉 map / filter
+
+❓ “Quero alterar o que já existe?”
+👉 forEach + atribuição
+
+❓ “Quero só saber um número / resposta?”
+👉 função pura, sem lista
+
+
+todo input com value deve estar dentro do .addeventlistener para funcionar
+--------------------------------------------------------------------------
+reduce:
+array.reduce((acumulador, itemAtual) => {
+  return novoValorDoAcumulador
+}, valorInicial)
+
+acumulador → o “total” até agora
+itemAtual → o item da vez
+valorInicial → como começa
+--------------------------------------------------------------------------
+existem dados (estado); variaveis, lista, inputs, objetos (só podem ser lidos)
+--------------------------------------------------------------------------
+existem transformações (quase a mesma ideia que formulas matematicas): function, map, filter, reduce.
+--------------------------------------------------------------------------
+existem decisões (essa eu não sei com o que comparar mas, entendo o conceito): if/else/for/while:
+3️⃣ Decisões — “o caminho”
+Aqui está o detalhe que fecha o círculo.
+if / else → escolher caminho
+for / while → repetir caminho
+💡 A melhor analogia não é matemática, é lógica de fluxo:
+“Se acontecer X, faça Y”
+“Enquanto isso for verdade, repita”
+Eles não transformam dados, eles controlam a execução.
+--------------------------------------------------------------------------
+filter: 
+const pagamentos = [
+  { descricao: 'Compra A', valor: 100, tipo: 'credito' },
+  { descricao: 'Compra B', valor: 50, tipo: 'debito' },
+  { descricao: 'Compra C', valor: 200, tipo: 'credito' }
+]
+uso:
+const debito = pagamentos.filter(item => item.tipo === debito)
+resultado:
+const debito = [
+  { descricao: 'Compra B', valor: 50, tipo: 'debito' }
+]
+
+📌 Conceito:
+filter precisa de uma condição booleana clara (true / false).
+--------------------------------------------------------------------------
+map:
+const pagamentos = [
+  { descricao: 'Compra A', valor: 100, tipo: 'credito' },
+  { descricao: 'Compra B', valor: 50, tipo: 'debito' },
+  { descricao: 'Compra C', valor: 200, tipo: 'credito' }
+]
+uso:
+const valor = pagamentos.map(item => item.valor)
+resultado
+const valor = [100, 50, 200]
+
+📌 Regra importante:
+map retorna array
+não envolve {} a menos que você esteja criando objetos
+--------------------------------------------------------------------------
+reduce:
+const valor = [100, 50, 200]
+uso:
+const resultado = valor. reduce((acumulador, valor atual) => acumulador + valor atual, 0)
+saída = 350
+--------------------------------------------------------------------------
+function:
+const pagamentos = [ 
+	{ descricao: 'Compra A', valor: 100, tipo: 'credito' },
+	{ descricao: 'Compra B', valor: 50, tipo: 'debito' }, 
+	{ descricao: 'Compra C', valor: 200, tipo: 'credito' } ]
+
+function filtro(){ 
+	const debito = pagamentos.filter(item => item.tipo === debito) 
+} 
+const novalista = filtro()
+
+ou
+function filtrarDebito(lista) {
+  return lista.filter(item => item.tipo === 'debito')
+}
+const novaLista = filtrarDebito(pagamentos)
+
+modelo mental
+function nome(ENTRADA) {
+   PROCESSO
+   return SAÍDA
+}
+SAÍDA = nome(DADOS)
+
+
+
+
+
+
+

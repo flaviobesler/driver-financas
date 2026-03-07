@@ -1,0 +1,20 @@
+ -mgit pull --rebase
+git status
+git add .
+git add src/app.js(arquivos específicos apenas)
+git commit -m 'nome da git'
+git push
+git push - u origin main (se for a primeira vez nessa branch)
+
+criar um novo projeto
+
+deslogue e relogue (motivos desconhecidos mas, funciona melhor) a conta do git hub
+criar o repositório e copiar o link disponibilizado
+
+git init 
+git status
+git add .
+git commit -m 'nome do commit'
+git branch -M main
+git remote add origin origin https://github.com/SEU_USUARIO/nome do repositorio.git
+git push -u origin main

@@ -1,0 +1,56 @@
+Tabela mental definitiva
+🔹 map
+Use quando:
+você entra com uma lista
+e sai com outra lista do mesmo tamanho
+cada item vira outro item
+📌 Exemplo de pergunta:
+“Como cada item deve ficar?”
+❌ Nunca use para:
+só calcular
+só mutar
+só percorrer
+retorna outra array
+
+🔹 filter
+Use quando:
+você entra com uma lista
+e sai com uma lista menor
+decide quem entra ou não
+📌 Exemplo de pergunta:
+“Esse item entra?”
+retorna outra array
+retornu true ou false
+
+🔹 reduce
+Use quando:
+você entra com uma lista
+e sai com 1 coisa só
+soma, agrupa, resume
+📌 Exemplo de pergunta:
+“O que tudo isso vira junto?”
+reduz a array em um único valor
+
+🔹 forEach
+Use quando:
+você não precisa de retorno
+quer causar efeito colateral
+alterar algo existente
+chamar UI, log, mutar objeto
+📌 Se você pensa em return, não é forEach.
+modifica a array sem retornar ela
+
+🔹 Função pura (return)
+Use quando:
+entra com dados
+sai com um valor
+não altera nada
+📌 Exemplo:
+“Qual é a parcela atual deste pagamento?”
+O erro nº1 que você cometia
+Você escolhia o método antes de saber o resultado.
+Isso inverte tudo.
+
+Regra de ouro (memorize)
+Forma do resultado define a ferramenta.
+Sempre.

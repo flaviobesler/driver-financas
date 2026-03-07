@@ -1,0 +1,43 @@
+feito:
+- colocar uma soma total em despesas fixas(feito)
+- informar que a meta semanal recomeça toda segunda(feito)
+- informar apenas dia e mês na parte de vencimento em despesas fixas(feito)
+- fazer a parte de recuperar senha.(feito)
+- dividir e lançar até 12 parcelas de valores parcelados no cartão de credito(feito)
+-- mudar geração de relatório de pdf para aparecer parcelamento (mais completo).(feito)
+-- mudar criação de conta para deixar senha mais segura(feito)
+-- deixar a parte de conta utilizável informando nome, email.(feito)
+---adicionar (excluir despesas fixas, avulsas e ganhos) (feito)
+--add excluir despesas fixas na pagina despesas(feito
+- add  12 meses no relatório(feito)
+-- add gorjeta no dashboard(feito)
+--re-fatoração de despesas avulsas - adicionar uma forma de colocar o credito em até 15 parcelas usando o mesmo id(feito)
+- re-fatoração do filtro usando duas datas em vez de um contador de meses para possibilitar a exclusão de parcelas futuras(feito)
+-mudar o nome do relatório para resumo (feito)
+-fim tem que ser >= inicio;(feito)
+fim e inicio precisam ser preenchidos(feito)
+
+-adicionar um .reduce na geração de relatório para mostrar os gastos usando o filtro.(feito)
+
+permitir update apenas de cancelamento na coluna status;(feito)
+permitir update apenas pelo sistema de pagamento  (feito)
+- integrar pagamento (feito)
+- fazer landing page.(feito)
+
+----------------------------------------------------------------------------------------------------------------------
+tasks finais - testar pagamento
+verificar se a ocorrência na mudança de status para ativo após confirmação
+trocar origem de vencimento da pagina conta para data do pagamento
+colocar status inadimplente para cancelado para o usuário ver (decisão ux/ui)
+
+se tudo certo
+
+pegar os ids de produção da stripe e colocar na vercel e permitir criação de conta 
+no supabase
+tirar comentários do js criar conta
+novo preço, 19,90
+criar conta suporte gmail
+
+testar criação de conta.
+
+- fazer lançamento para o publico.
