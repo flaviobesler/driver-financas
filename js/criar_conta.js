@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       span.style.color = 'green';
     }
 
-    btnSubmit.disabled = true;
+    btnSubmit.disabled = true; 
 
 
     })
