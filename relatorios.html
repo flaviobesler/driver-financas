@@ -12,104 +12,52 @@
             font-size: 20px;
             font-family: 'roboto', sans-serif;
         }
-        .relatorio{
-            display: flex;
-            flex-direction: column;
-            margin-left: 10px;
-            margin-top: 10px;
+        .geracao input{
+            width: 150px;
+            height: 40px;
+            border: solid 1px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
-        .relatorio button, .relatorio button a{
-            text-decoration: none;
+        .resumo button{
             width: 300px;
-            min-height: 35px;
-            font-size: 15px;
+            height: 40px;
             border: none;
             background-color: #2067b3;
-            border-radius: 5px;
             color: white;
-            margin-top: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+            margin-top: 20px;
         }
-   
-        .intervalo{
+        .conteiner{
             display: flex;
             gap: 10px;
         }
-        .intervalo input{
-            width: 140px;
-            min-height: 35px;
-            font-size: 15px;
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;
+        .resumo{
+            margin-top: 50px;
+            margin-left: 30px;
             
         }
-        
-
-        @media (min-width: 800px) {
-        .mobile{
-        display: none;}
-        .conteiner{
-        display: flex;}
-        .tabela th,
-        .tabela td{
-            padding: 10px 70px;
-        }
-        tbody button{
-            width: 80px;
-            min-height: 35px;
-            font-size: 15px;
-            border: none;
-            background-color:#2067b3;
-            border-radius: 5px;
-            color: white;}
-        .span{
-        display: none;
-        }
-        .tdtotal{
-        text-align: center;
-        vertical-align: middle;}
-       
-            
-        }/*fim desktop*/
-
-        @media (max-width: 800px) {
-            .desktop{
-            display: none;
-            }
-
-            .lista dl{
+        .listas{
+            display: flex;}
+        .listas dl{
             margin: 20px;
             text-align: center;}
-
-            .listas{
-            display: flex;
-            
-            }
-            
-            .lista dt, .lista dd{
+        .listas dd, .listas dt{
             flex-direction: column;
             margin:0px;
             margin-top: 10px;
             }
-            .lista button{
-                width: 300px;
-                min-height: 35px;
-                font-size: 15px;
-                margin-left: 10px;
-                border: none;
-                background-color:#2067b3;
-                border-radius: 5px;
-                color: white;}
-            dt{
-            font-weight: bold;
-            }
-            .tdtotal{ display: none;}
-            .span{
-            
-            margin: 20px;
+        dt{
+        font-weight: bold;
         }
+    
             
-        }/*fim celular*/
 
+            
+        
     </style>
 </head>
 <body>
@@ -123,70 +71,20 @@
         </ul>
     </nav>
 
-    <div class="conteiner">
-        <div>
-            <div class="relatorio">
-                <h2>despesas</h2>  
-                <div class="intervalo">
-                    <div>
-                        de: <br>
-                        <input type="date" id="iniciodespesa">
-                    </div>
-                    <div>
-                        até: <br>
-                        <input type="date" id="fimdespesa">
-                    </div>
-                </div>
-                <button id="btnDespesas">gerar relatorio</button>
-            </div>
-            <div class="relatorio">
-                <h2>lucros</h2>
-                <div class="intervalo">
-                    <div>
-                        de: <br>
-                        <input type="date" id="inicioLucro">
-                    </div>
-                    <div>
-                        até: <br>
-                        <input type="date" id="fimLucro">
-                    </div>
-                </div>
-                <button id="btnLucros">gerar relatorio</button>
-
-            </div>
+    <div class="resumo">
+        <h2>seu resumo</h2>
+        <div class="conteiner">
+            <div class="geracao"> de: <br><input type="date" id="inicioResumo"></div>
+            <div class="geracao"> até:<br><input type="date" id="fimResumo"></div>
         </div>
-        <br>
-        <span class="span" id="span"></span>
-        <div class="desktop">
-            <table class="tabela">
-                <thead>
-                    <tr>
-                        <th>descricao
-                        </th>
-                        <th>valor</th>
-                        <th>parcela</th>
-                        <th>data</th>
-                        <th></th>
-                    </tr>
-                </thead>
-               
-                <tbody id="tbody">
-                
-                </tbody>
-                
-            </table>
-        </div>
-
+        <span id="span"></span><br>
+        <button id="gerarRelatorio">gerar resumo</button>
     </div>
-    <div class="mobile">
-        <div class="lista" id="lista"></div>
-    </div>
-    <br>
+    <span id="spantotal"></span>
+  
+    <div id="tabela" class="resumo"></div>
+        
     
-
-
-
-
 
 <script type="module" src="/js/relatorios.js" defer></script>
 <script type="module" src="/js/conta.js" defer></script>

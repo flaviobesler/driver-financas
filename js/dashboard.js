@@ -36,7 +36,7 @@ SalvarNome.style.display = 'none';
 
 addNome.addEventListener('click', () =>{
   nomeInput.style.display = 'block';
-  SalvarNome.style.display = 'inline';
+  SalvarNome.style.display = 'block';
   addNome.style.display = 'none';
 
   nomeInput.focus();
@@ -68,15 +68,19 @@ SalvarNome.addEventListener('click', async () => {
 const btnGorjeta = document.getElementById('btngorjeta');
 
 btnGorjeta.addEventListener('click', async() =>{
-  const gorjeta  = parseFloat(document.getElementById('inputGorjeta').value);
+  const valor  = parseFloat(document.getElementById('inputGorjeta').value);
   const identGorjeta = 'gorjeta';
+  const tipo = 'lucro'
+  btnGorjeta.disabled = true;
+  try{
 
   const { error} = await supabase
-  .from('ganhos_do_dia')
+  .from('movimentacoes')
   .insert({
-    identificacao: identGorjeta,
-    valor: gorjeta,
-    criado_em: new Date().toISOString()
+    type: tipo,
+    identify: identGorjeta,
+    value: valor,
+    created_at: new Date().toISOString()
   });
   if(error){
     console.log(error);
@@ -85,7 +89,13 @@ btnGorjeta.addEventListener('click', async() =>{
     alert ('gorjeta adicionada com sucesso')
   }
   
-  btnGorjeta.disabled = true;
+  
+  } catch (e) {
+    console.error(e);
+  }
+  setTimeout(() => {
+    btnGorjeta.disabled = false;
+  }, 10000);
 
 })
 
@@ -96,12 +106,15 @@ btnGorjeta.addEventListener('click', async() =>{
 
 
 
-
-document.getElementById('btn_ganho').addEventListener('click',add_ganho);
+const btnganho = document.getElementById('btn_ganho');
+btnganho.addEventListener('click',add_ganho);
 async function add_ganho() {
 
+    btnganho.disabled = true;
+    try{
     const identificacao = document.getElementById('identificacao_ganho').value;
     const valor = parseFloat(document.getElementById('valor_ganho').value);
+    const tipo = 'lucro'
 
     if ( !valor || valor<=0 ){
         alert('preencha todos os campos!');
@@ -109,11 +122,12 @@ async function add_ganho() {
     }
 
     const {data:dataGanhos, error: errorGanhos} = await supabase
-    .from ('ganhos_do_dia')
+    .from ('movimentacoes')
     .insert({
-        identificacao,
-        valor,
-        criado_em: new Date().toISOString()
+      type: tipo,
+      identify: identificacao,
+      value: valor,
+      created_at: new Date().toISOString()
     });
 
     if (dataGanhos || errorGanhos) {
@@ -125,7 +139,13 @@ async function add_ganho() {
     document.getElementById('valor_ganho').value="";
 
     
-    document.getElementById('btn_ganho').disabled = true;
+      } catch (e) {
+    console.error(e);
+  }
+  setTimeout(() => {
+    btnganho.disabled = false;
+  }, 10000);
+
 }
 
 
@@ -160,35 +180,23 @@ function formatarReal(valor){
   }).format(valor);
 }
 
-const mostrar = document.getElementById('mostrar');
-const esconder = document.getElementById('esconder');
-const divmeta = document.getElementById('divmeta');
 
-divmeta.style.display = 'none';
-esconder.style.display = 'none';
-
-
-esconder.addEventListener('click', ()=>{
-  divmeta.style.display = 'none';
-  esconder.style.display= 'none';
-  mostrar.style.display = 'block'
-})
 
 //antes do grafico
 
-mostrar.addEventListener('click', async ()=>{
-  divmeta.style.display = 'block';
-  mostrar.style.display = 'none';
-  esconder.style.display = 'block';
-  
+addEventListener('DOMContentLoaded', async ()=>{
+
+    
   const {data:metaData, error:metaError} = await supabase
     .from('meta_semanal')
     .select('id, valor');
     
+
   
   const {data:ganhoData, error:ganhoError} = await supabase
-    .from('ganhos_do_dia')
-    .select('valor, criado_em');
+    .from('movimentacoes')
+    .select('*')
+    .eq('type', 'lucro');
 
     
     
@@ -214,27 +222,27 @@ mostrar.addEventListener('click', async ()=>{
 
   if (!meta || meta <=0){
     metaSpan.style.display = 'none';
-    metaInput.style.display = 'inline';
+    metaInput.style.display = 'block';
 
-    btnRegistrar.style.display = 'inline';
+    btnRegistrar.style.display = 'block';
     btnEdMeta.style.display = 'none';
     btnEditar.style.display = 'none';
       return;
   }
 
-  metaSpan.style.display = 'inline';
+  metaSpan.style.display = 'block';
   metaInput.style.display = 'none';
 
   btnRegistrar.style.display = 'none';
-  btnEditar.style.display = 'inline';
+  btnEditar.style.display = 'block';
 
 
   //
   btnEditar.addEventListener('click', () => {
   metaSpan.style.display = 'none';
-  metaInput.style.display = 'inline';
+  metaInput.style.display = 'block';
   btnEditar.style.display = 'none';
-  btnEdMeta.style.display = 'inline';
+  btnEdMeta.style.display = 'block';
 
   metaInput.focus();
   });
@@ -268,7 +276,7 @@ metadiaria.textContent = formatarReal(diaria)
 
   const ganhos = ganhoData; //arrays das colunas valor e criado_em
 
-  
+  console.log(ganhos)
   
 
   function getSemanaAtual(){
@@ -312,10 +320,10 @@ metadiaria.textContent = formatarReal(diaria)
   function calcularProgresso(){
     const totalGanhos = ganhos
     .filter(g =>{
-      const data = new Date(g.criado_em);
+      const data = new Date(g.created_at);
       return data>= inicio && data<= fim;
     })
-    .reduce((soma,g) => soma + g.valor,0);
+    .reduce((soma,g) => soma + g.value,0);
     
     return{
       atingido: totalGanhos,
@@ -326,20 +334,20 @@ metadiaria.textContent = formatarReal(diaria)
   
   
   const canvas = document.getElementById('metaChart');
-  const ctx = canvas.getContext('2d');
 
-  new Chart (ctx,{
+
+  new Chart (canvas,{
     type: 'doughnut',
     data:{
       labels:['atingido', 'restante'],
       datasets:[{
         data: [progresso.atingido, progresso.restante],
-        backgroundColor: ['red', 'blue']
+        backgroundColor: ['green', 'gray']
       }]
     },
     options:{
-      animation: false,
-      responsive: false,
+       cutout: '40%' // padrão ~50%
+
     }
     
     

@@ -10,21 +10,21 @@ import { supabase } from "./supabaseClients.js";
     const Spanvencimento = document.getElementById('vencimento');
     const btnsair = document.getElementById('sair');
     
-    const SpanCancelar = document.getElementById('SpanCancelar');
+    /*const SpanCancelar = document.getElementById('SpanCancelar');
     const btnCancelar = document.getElementById('cancelar');
     const btnDesejoCancelar = document.getElementById('DesejoCancelar');
     const SpanCancelar2 = document.getElementById('SpanCancelar2');
     const btnManter = document.getElementById('manterAssinatura');
+    const btnassinar = document.getElementById('assinar');*/
     const btnRedefinir = document.getElementById('redefinirSenha');
-    const btnassinar = document.getElementById('assinar');
     
 
 InputNome.style.display = 'none';
 btnSalvar.style.display = 'none';
-SpanCancelar.style.display = 'none';
+/*SpanCancelar.style.display = 'none';
 btnDesejoCancelar.style.display = 'none';
 SpanCancelar2.style.display = 'none';
-btnManter.style.display = 'none';
+btnManter.style.display = 'none';*/
 
 document.addEventListener('DOMContentLoaded', async () =>{
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
     const statusbanco  = data[0].status;
 
     const criado = data[0].created_et
-
+    /*
     if(statusbanco !== 'ativo'){
         btnCancelar.style.display = 'none';
         btnassinar.style.display = 'block';
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
         btnassinar.style.display = 'none';
     }
     
-
+*/
     //atualizar nome
     btnEditar.addEventListener('click', () =>{
     nomeSpan.style.display = 'none';
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async () =>{
     }
 
 
-btnCancelar.addEventListener('click',  () => {
+/*btnCancelar.addEventListener('click',  () => {
     btnRedefinir.style.display= 'none';
     btnCancelar.style.display = 'none';
 
@@ -142,7 +142,7 @@ btnDesejoCancelar.addEventListener('click', async () => {
         return;}
   window.location.href = '/login.html';
 
-
+*/
 })
 btnsair.addEventListener('click', async () => {
   const { error } = await supabase.auth.signOut();
@@ -162,4 +162,4 @@ btnsair.addEventListener('click', async () => {
 
 
 
-});
+//});

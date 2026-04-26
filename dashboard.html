@@ -230,7 +230,7 @@
     <div class="conteiner">
         
          <div>
-            <button class="mostrameta" id="mostrar"> mostrar meta</button>
+           
             <div class="meta" id="divmeta">            
                 <ul >
                     
@@ -251,8 +251,8 @@
                         
                     </li>
                     
-                    <li class="grafico-pizza">
-                        <canvas id="metaChart" width="100px" height="100px"></canvas>
+                    <li class="grafico-pizza" style="width: 200px;"">
+                        <canvas id="metaChart" ></canvas>
                                         
                     </li>
                     <li>
@@ -261,7 +261,7 @@
                 </ul>
                 <p class="fonte">Sua meta semanal equivale a uma média <br>diária de R$ <span id="metadiaria"></span>. Use como referência.</p>
             </div>
-            <button class="esconderMeta" id="esconder"> esconder meta</button>
+            
         </div><!--final div coluna-->
 
         <div class="imagem">
@@ -279,7 +279,7 @@
                 <li>identificação (opicional) <br>
                     <input  id="identificacao_ganho"
                             type="text" 
-                            placeholder="gorjeta, salario, uber/99">
+                            placeholder="salario, uber/99, etc">
                 </li>
                 <li>
                     valor <br>
@@ -318,8 +318,7 @@
         
     </div> 
     </div>
-
-    <script src="/js/chats.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
     <script type="module" src="/js/dashboard.js" defer></script>
     <script type="module" src="/js/span.js" defer></script>
     <script type="module" src="/js/conta.js" defer></script>

@@ -9,211 +9,72 @@
     <script src="/js/navbar.js" defer></script>
 
     <style>
-                   
-        .itens{
-            list-style: none;
-            }
-
-        .itens input,
-        .itens select{
-            width: 85%;
-            min-height: 30px;
-            border-radius: 5px;
-            border: 1px solid rgba(0,0,0,0.2);
-            margin-top: 10px;
-            margin-bottom: 10px;   
-            }
-
-        .itens li button{
-            background-color:#2067b3;
-            margin-top: 15px;
-            width: 150px;
-            min-height: 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            color: white;
-
-        }
-        
-        .segundo-item{
-            list-style: none;
-            margin-bottom: 10px;
-            
-        }
-
-        .segundo-item input,
-        .segundo-item select{
-           
-            min-height: 30px;
-            border-radius: 5px;
-            border: 1px solid rgba(0,0,0,0.2);
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        .segundo-item button{
-            margin-top: 10px;
-            margin-bottom: 10px;
-            background-color: #2067b3;;
-            width: 150px;
-            min-height: 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 20px;
-            color: white;
-        }
-        .titulo-interno2{
-            margin-top: 0px;}
-        .table select{
-            width: 18px;
-            height: 20px;
-            margin-left: 20px;
-            margin-right: 20px;
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;}
-
-        #dadosBanco .linha_banco td {
-        text-align: center;       
-        padding: 8px;
-        border-bottom: 1px solid #ccc;
-        font-size: 14px;
-        color: #333;
-
-}
-        .table button{
-        margin-top: 10px;
-        background-color:#2067b3;;
-        min-height: 30px;
-        border: none;
-        border-radius: 5px;
-        font-size: 10px;
-        color: white;
-        margin-bottom:10px;
-
-        }
-
-        .mostrar_dados{
-        margin-left: 20px;
-        margin-top: 10px;
-        background-color: #2067b3;;
-        min-height: 30px;
-        border: none;
-        border-radius: 5px;
-        font-size: 10px;
-        color: white;
-        margin-bottom:10px;
-        width: 150px;
-        }
-
-        .table{
-        text-align: center;
-        border-radius: 5px;
+    
+    body{
         font-family: 'Roboto', sans-serif;
         font-size: 20px;
+    }
+    .conteiner{
+        display: flex;
+        gap: 10%;
+        justify-content: center;
         align-items: center;
-        margin: 20px;}
         
-        .linha-info{
-        font-size: 15px;
-        }
-        
-     /*gastos sazionais no celular*/
-    @media (max-width:900px) {
-    
-        .table{
-        margin-left: 40px;
-        align-items: center;}
-        
-        .tbody-table td{
-            padding: 0;        
-        }
-
-        .box{
-            margin-bottom: 10px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 20px;
-            align-items: center;
-            margin: 20px;
-            margin-top: 20px;
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;
-        }
-
-        .segundo-item input,
-        .segundo-item select{
-            width: 85%;
-        }
-
-        .segundo-item{
-        
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 20px;
-            box-sizing: border-box;
-            align-items: center;
-            margin: 20px;
-            height: 460px;
-            }
-
-       
-
-       
+    }
+                   
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: solid 1px rgba(0,0,0,0.2);
+        border-radius: 5px;
+        margin: 10px;
+        padding: 20px;
     }
 
- /*gastos sazionais no computador*/
-    @media (min-width: 900px) {
-        .table td,
-        .table tbody{
-        padding-left: 40px;
-        padding-right: 40px;}
+    .box h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-       
-        .conteudo{
-        display: flex;
-        align-items: flex-start;
-        gap: 40px;
+    .box label {
+        width: 300px;
+        margin: 10px 0 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .box input {
+        width: 300px;
+        height: 30px;
+        border: solid 1px rgba(0,0,0,0.2);
+        border-radius: 5px;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .box button {
+        width: 300px;
+        height: 40px;
+        border: none;
+        background-color: #2067b3;
+        color: white;
+        border-radius: 5px;
         margin-top: 20px;
-        }
-        .segunda-box{
-           position: static;
-           display: flex;
-           align-items: flex-start;
-        }
-        
-        
-       
-        .titulo-interno{
-        margin-top: 20px;}
-        .box{
-            margin-bottom: 10px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 20px;
-            align-items: center;
-            min-width: 400px;
-            margin: 20px;
-            margin-top: 20px;
-            box-sizing: border-box;
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;    
-        }
-         .segundo-item input,
-        .segundo-item select{
-            width: 290px;}
+    }
 
-        .segunda-box{
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 5px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 20px;
-            box-sizing: border-box;
-            align-items: first baseline;
-            width: 70%;
-            margin: 20px;}
-        .identacao{
-            vertical-align:top; 
+    @media (max-width: 768px) {
+        .conteiner{
+            display: flex;
+            flex-direction: column;
+            gap: 10%;
+            justify-content: center;
+            align-items: center;
+            
+            
         }
- }
+        
+    }
 
     </style>
 
@@ -221,7 +82,7 @@
 </head>
 <body>
     
-    <!--barra de navegação-->
+
     <nav class="navbar" id="navbar">
         <button class="menu-toggle" aria-label="Abrir menu"> ☰</button>
         <ul class="menu">
@@ -231,111 +92,37 @@
             <li class="Account"><a href="conta.html">conta</a></li>
         </ul>
     </nav>
-    
-    <div class="conteudo">
-        <!--despesa avulsa-->
-        <div class="box">
-            <ul class="itens">
-                <h1 class="titulo-interno">Despesa recorrente variavel</h1>
-                <li>
-                    identificação <br>
-                    <input  id="id_avulso" 
-                            type="text" 
-                            placeholder="agua/luz, gasolina, manutenção">
-                </li>
-                <li>
-                    valor <br>
-                    <input  id="valor_avulso" 
-                            type="number"
-                            placeholder="R$ 0,00">
-                </li>
-                <li>
-                    forma de pagamento <br>
-                    <select id="pag_avulso"
-                            type="text">
-                        <option>pix</option>
-                        <option>debito</option>
-                        <option>credito</option>
-                        <option>dinheiro</option>
-                        <option>outras</option>
-                    </select>
-                </li>
-                <li>
-                    
-                    <input 
-                            type="number" 
-                            id="parcel_avulso" 
-                            placeholder="Quantas parcelas?" 
-                            style="display:none;">
-                </li>
-                <li>
-                    <button type="button" 
-                            id="btn_avulso">registrar</button>
-                </li>
-            </ul>
-            </div>
-            <!--despesa fixa-->
-            <div class="segunda-box">
-            
-                <ul class="segundo-item">
-                <h1 class="titulo-interno2">Despesa fixa</h1>
-                    <li >
-                        identificação <br>
-                        <input
-                                id="id_fixo"
-                                type="text" 
-                                placeholder="funcionario, alguel, parcelamentos" >
-                    </li>
-                    <li >
-                        valor <br>
-                        <input  id="valor_fixo"
-                                type="number" 
-                                placeholder=" R$0,00">
-                    </li>
-                    <li>
-                        dia do vencimento <br>
-                        <input  type="date"
-                                id="venci_fixo">
-                    </li>
-                    
-                    <li>
-                        <button type="button_mostrar" id="btn_fixo">registrar</button>
-                    </li>
-                </ul>
 
-                <!--tabela despesas fixas-->
+    <div class="conteiner">
+        <div id="veiculo" class="box">
+            <h2>veiculo</h2>
 
-                <div class="identacao">  
+            <label for="identVeiculo">Identificação</label>
+            <input id="identVeiculo" type="text" placeholder="gasolina, revisão, manutenção, etc...">
 
-                    <button class="mostrar_dados" id="mostrar_dados">Mostrar despesas fixas</button>
-                    <button class="mostrar_dados" id="esconder_dados">Esconder despesa</button>
+            <label for="valorVeiculo">Valor</label>
+            <input id="valorVeiculo" type="number" placeholder="R$0,00">
 
-                    <table class="table" id="tabelabanco">
-                            <tr class="linha-info">                            
-                                    <td >despesa</td>
-                                    <td >valor</td>
-                                    <td >vencimento</td>
-                                    <td></td>            
-                            </tr>
-                            <tbody id="dadosBanco"></tbody>
-                    </table>
-                </div>  
-                
-            </div>
-                <div class="mobile">
-                    <div class="lista" id="lista"></div>
-                </div>
-    
+            <button id="btnVeiculo">salvar</button>
         </div>
+
+        <div id="pessoal" class="box">
+            <h2>pessoal</h2>
+
+            <label for="identPessoal">Identificação</label>
+            <input id="identPessoal" type="text" placeholder="aluguel, energia, agua, etc">
+
+            <label for="valorPessoal">Valor</label>
+            <input id="valorPessoal" type="number"  placeholder="R$ 0,00">
+
+            <button id="btnPessoal">salvar</button>
+
+        </div>
+    </div>
+    
+   
     <script type="module" src="js/despesas.js" defer></script>
-    <script type="module" src="/js/conta.js" defer></script> 
-    <script>
-        document.getElementById('pag_avulso').addEventListener('change', function(){
-            const parcelas = document.getElementById('parcel_avulso');
-            parcelas.style.display = this.value === 'credito'?'block': 'none';
-        });
-        
-    </script>  
+    <script type="module" src="/js/conta.js" defer></script>   
     <script type="module" src="/js/span.js" defer></script>
 
     <footer class="footer">
